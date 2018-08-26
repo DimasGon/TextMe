@@ -29,7 +29,7 @@ ALLOWED_HOSTS = []
 DATE_INPUT_FORMATS = ['%d.%m.%Y']
 
 INSTALLED_APPS = [
-    # 'auth_app',
+    'auth_app',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -101,7 +101,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# AUTH_USER_MODEL = 'auth_app.MesUser'
+AUTH_USER_MODEL = 'auth_app.MesUser'
 
 
 # Internationalization
