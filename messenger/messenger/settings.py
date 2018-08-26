@@ -29,6 +29,8 @@ ALLOWED_HOSTS = []
 DATE_INPUT_FORMAT = ['%d.%m.%Y']
 
 INSTALLED_APPS = [
+
+    'main_app',
     'auth_app',
 
     'django.contrib.admin',
