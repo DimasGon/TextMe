@@ -1,15 +1,18 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/bootstrap-grid.min.css">
-    <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
-    <link rel="stylesheet" href="css/whhg.css">
-    <title>TextMe - Chats</title>
+    <link rel="stylesheet" href="{% static 'messenger/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'messenger/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'messenger/css/bootstrap-grid.min.css' %}">
+    <link rel="stylesheet" href="{% static 'messenger/css/bootstrap-reboot.min.css' %}">
+    <link rel="stylesheet" href="{% static 'messenger/css/whhg.css' %}">
+    {% block css %}{% endblock css %}
+    {% block js %}{% endblock js %}
+    <title>{% block title %}{% endblock title %}</title>
 </head>
 <body>
 
@@ -23,7 +26,7 @@
                 <a class="nav-link" href=""><i class="icon-chat"></i></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="account.html"><img src="img/logo.jpg" class="acc-logo"></a>
+                <a class="nav-link" href="account.html"><img src="{% static 'messenger/img/logo.jpg' %}" class="acc-logo"></a>
             </li>
         </ul>
     </div>
@@ -32,56 +35,56 @@
     <div class="chats scroll">
         <a href="/id">
             <div class="left-content btm-border">
-                <img src="img/friend.jpg">
+                <img src="{% static 'messenger/img/friend.jpg' %}">
                 <h5>Диана Кретова</h5>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing</p>
             </div>
         </a>
         <a href="/id">
             <div class="left-content btm-border">
-                <img src="img/friend.jpg">
+                <img src="{% static 'messenger/img/friend.jpg' %}">
                 <h5>Диана Кретова</h5>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing</p>
             </div>
         </a>
         <a href="/id">
             <div class="left-content btm-border">
-                <img src="img/friend.jpg">
+                <img src="{% static 'messenger/img/friend.jpg' %}">
                 <h5>Диана Кретова</h5>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing</p>
             </div>
         </a>
         <a href="/id">
             <div class="left-content btm-border">
-                <img src="img/friend.jpg">
+                <img src="{% static 'messenger/img/friend.jpg' %}">
                 <h5>Диана Кретова</h5>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing</p>
             </div>
         </a>
         <a href="/id">
             <div class="left-content btm-border">
-                <img src="img/friend.jpg">
+                <img src="{% static 'messenger/img/friend.jpg' %}">
                 <h5>Диана Кретова</h5>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing</p>
             </div>
         </a>
         <a href="/id">
             <div class="left-content btm-border">
-                <img src="img/friend.jpg">
+                <img src="{% static 'messenger/img/friend.jpg' %}">
                 <h5>Диана Кретова</h5>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing</p>
             </div>
         </a>
         <a href="/id">
             <div class="left-content btm-border">
-                <img src="img/friend.jpg">
+                <img src="{% static 'messenger/img/friend.jpg' %}">
                 <h5>Диана Кретова</h5>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing</p>
             </div>
         </a>
         <a href="/id">
             <div class="left-content btm-border">
-                <img src="img/friend.jpg">
+                <img src="{% static 'messenger/img/friend.jpg' %}">
                 <h5>Диана Кретова</h5>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing</p>
             </div>
@@ -89,97 +92,7 @@
     </div>
 </div>
 
-<!-- Блок чата -->
-<div class="chat-content">
-    <!-- С кем чат -->
-    <div class="chat-with-person">
-        Чат с: <a href="/accounts/id.html">Диана Кретова</a>
-    </div>
-    <hr>
-    <!-- Окно чата -->
-    <div class="chat-window scroll">
-        <!-- Каждый ul для одного сообщения -->
-        <ul class="mes-container">
-            <li class="user-mes">Сообщение пользователя 1 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eaque accusamus perspiciatis rem voluptatem blanditiis voluptates, rerum, hic corporis magni vel odit molestiae eveniet? Modi animi ut culpa aperiam! Nesciunt, commodi.<span>12:03</span></li>
-        </ul>
-        <ul class="mes-container">
-            <li class="user-mes">Сообщение пользователя 2<span>12:03</span></li>
-        </ul>
-        <ul class="mes-container">
-            <li class="friend-mes">Сообщение друга 1 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Expedita laborum nam quos eum unde assumenda autem, nihil nulla magni consequuntur!<span>12:03</span></li>
-        </ul>
-        <ul class="mes-container">
-            <li class="user-mes">Сообщение пользователя 3<span>12:03</span></li>
-        </ul>
-        <ul class="mes-container">
-            <li class="friend-mes">Сообщение друга 2<span>12:03</span></li>
-        </ul>
-        <ul class="mes-container">
-            <li class="friend-mes">Сообщение друга 3<span>12:03</span></li>
-        </ul>
-        <ul class="mes-container">
-            <li class="user-mes">Сообщение пользователя 4<span>12:03</span></li>
-        </ul>
-        <ul class="mes-container">
-            <li class="user-mes">Сообщение пользователя 5<span>12:03</span></li>
-        </ul>
-        <ul class="mes-container">
-            <li class="friend-mes">Сообщение друга 4<span>12:03</span></li>
-        </ul>
-        <ul class="mes-container">
-            <li class="friend-mes">Сообщение друга 5 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, magnam.<span>12:03</span></li>
-        </ul>
-        <ul class="mes-container">
-            <li class="friend-mes">Сообщение друга 6<span>12:03</span></li>
-        </ul>
-        <ul class="mes-container">
-            <li class="user-mes">Сообщение пользователя 6<span>12:03</span></li>
-        </ul>
-        <ul class="mes-container">
-            <li class="user-mes">Сообщение пользователя 7<span>12:03</span></li>
-        </ul>
-        <ul class="mes-container">
-            <li class="friend-mes">Сообщение друга 7<span>12:03</span></li>
-        </ul>
-    </div>
-    <!-- Поле для ввода текста сообщения -->
-    <div class="mes-field">
-        <form>
-            <div class="form-group no-mg file-upload">
-                <input type="text" class="form-control" placeholder="Введите текст сообщения">
-                <label>
-                    <input type="file" class="not-full-line"><span><i class="icon-paperclip"></i></span>
-                </label>
-                <button type="submit" class="btn btn-primary btn-right-align">Отправить</button>
-            </div>
-        </form>
-    </div>
-</div>
-<!-- Информация о собеседнике -->
-<div class="interlocutor-content scroll">
-    <div class="il-info">
-        <img src="img/friend.jpg">
-        <h3>Диана Кретова</h3>
-        <p>Украина, Харьков</p>
-        <span>07.06.2005</span>
-        <hr>
-    </div>
-    <div class="shared-photos">
-        <p><span><i class="icon-images-gallery"></i></span> ОБЩИЕ ФОТО</p>
-        <img src="img/photo.jpg">
-        <img src="img/Endless.jpg">
-        <img src="img/motiv.jpg">
-        <img src="img/willsmith.jpg">
-        <img src="img/photo.jpg">
-        <img src="img/Endless.jpg">
-        <img src="img/motiv.jpg">
-        <img src="img/willsmith.jpg">
-        <img src="img/photo.jpg">
-        <img src="img/Endless.jpg">
-        <img src="img/motiv.jpg">
-        <img src="img/willsmith.jpg">
-    </div>
-</div>
-    
+{% block content %}{% endblock content %}
+
 </body>
 </html>
