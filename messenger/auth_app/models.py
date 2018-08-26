@@ -5,14 +5,12 @@ from django.db.models.signals import pre_save, post_save
 
 class MesUser(AbstractUser):
 
-    username = models.CharField(max_length=20, verbose_name='Имя в системе')
     first_name = models.CharField(max_length=20, verbose_name='Имя')
     second_name = models.CharField(max_length=20, verbose_name='Фамилия')
     email = models.EmailField(verbose_name='Эллектронный адрес')
     birth_place = models.CharField(max_length=50, verbose_name='Место рождения')
     birth_date = models.DateField(verbose_name='Дата рождения')
     avatar = models.ImageField(verbose_name='Аватар')
-    password = models.CharField(max_length=20, verbose_name='Пароль')
     signin_date = models.DateTimeField(auto_now_add=True)
 
 def before_save(sender, instance, created, **kwargs):
