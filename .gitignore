@@ -1,3 +1,4 @@
 Шаблон/*
 *.cpython-36.pyc
 messenger/messenger/local_settings.py
+messenger/auth_app/migrations/*
