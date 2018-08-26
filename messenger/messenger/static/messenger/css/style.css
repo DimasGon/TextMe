@@ -1,0 +1,362 @@
+body, html { 
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+hr {
+    margin-top: 0 !important;
+}
+a:hover {
+    text-decoration: none !important;
+}
+li {
+    list-style-type: none;
+}
+.btm-border {
+    border-bottom: 1px solid rgba(0,0,0,.1);
+}
+.no-mg {
+    margin: 0 !important;
+}
+
+.acc-logo {
+    height: 45px;
+    border-radius: 100%;
+    margin-bottom: 10px;
+}
+
+.left-menu {
+    float: left;
+    height: 100vh;
+    width: 30%;
+    background-color: rgb(226, 225, 225);
+}
+.left-title {
+    color: #007bff;
+    text-align: center;
+    font-size: 40px;
+}
+.left-title ul {
+    margin: 0;
+}
+.left-title ul li {
+    display: inline;
+    margin-right: 5px;
+    padding: 0 30px !important;
+}
+.left-title span {
+    color: black;
+    font-size: 10px;
+}
+
+.chats {
+    height: 85%;
+}
+
+.scroll {
+    overflow: auto;
+}
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: none;
+}
+::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: none; 
+}
+
+.left-content {
+    float: left;
+    margin: 10px 10px;
+    padding-bottom: 20px;
+    width: 94%;
+}
+.left-content img {
+    float: left;
+    max-height: 75px;
+    margin-left: 5%;
+    border-radius: 100%;
+}
+.left-content h5 {
+    color: black;
+    margin: 10px 0 0 0;
+    padding-left: 17px;
+    width: 71%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+} 
+.left-content p {
+    padding-left: 17px;
+    color: grey;
+    font-size: 15px;
+    width: 71%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ------------------------ СТИЛИ ЧАТА ------------------------ */
+
+.chat-content {
+    float: left;
+    width: 50%;
+    height: 100vh;
+    border-right: 1px solid rgba(0,0,0,.1);
+    font-size: 30px;
+}
+.chat-content hr {
+    margin-bottom: 0;
+}
+
+.chat-with-person {
+    padding: 10px 30px;
+    color: grey;
+    height: 10vh;
+}
+.chat-with-person a {
+    padding-left: 10px;
+}
+.chat-window {
+    -ms-box-orient: horizontal;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-end;
+    align-content: flex-end;
+    flex-direction: column-reverse;
+    float: left;
+    height: 77vh;
+    width: 100%;
+}
+.mes-container {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+.mes-container li {
+    padding: 5px 10px;
+}
+.mes-container span {
+    padding-top: 4px;
+    display: block;
+    color: rgb(114, 113, 113);
+    line-height: 10px;
+    font-size: 15px;
+}
+
+.user-mes {
+    margin: 0 5px 5px 10%;
+    border-radius: 20px 20px 5px 20px;
+    background-color: rgb(172, 179, 243);
+    font-size: 16px;
+    text-align: right;
+    float: right;
+}
+.friend-mes {
+    margin: 0 10% 5px 5px;
+    border-radius: 20px 20px 20px 5px;
+    background-color: rgb(224, 243, 172);
+    font-size: 16px;
+    float: left;
+}
+
+.mes-field {
+    width: 100%;
+    float: left;
+    height: 12.9vh;
+    padding: 0 3px;
+}
+.not-full-line {
+    width: 80%;
+}
+.file-upload input[type="file"] {
+    display: none;
+}
+.file-upload span {
+    font-size: 30px;
+    margin-left: 20px;
+    color: #007bff;
+}
+.file-upload label {
+    margin-bottom: 0;
+}
+.btn-right-align {
+    margin-top: 4px;
+    float: right;
+    display: inline;
+}
+
+.interlocutor-content {
+    float: left;
+    height: 100vh;
+    width: 20%;
+}
+.il-info {
+    width: 100%;
+    text-align: center;
+}
+.il-info img {
+    height: 100px;
+    border-radius: 100%;
+    margin-top: 20px;
+}
+.il-info p {
+    margin: 0;
+    font-weight: bold;
+    color: gray;
+}
+.il-info span {
+    margin: 0;
+    color: gray;
+}
+.shared-photos {
+    width: 100%;
+}
+.shared-photos p {
+    font-family: sans-serif;
+    margin: 10px 0;
+    font-size: 20px;
+    text-align: center;
+}
+.shared-photos span {
+    color: #007bff;
+}
+.shared-photos img {
+    padding: 3px 1%;
+    width: 50%;
+    float: left;
+}
+
+/* ---------------------------- Стили страницы аккаунтов ---------------------------- */
+
+.acc-content {
+    float: left;
+    width: 50%;
+    height: 100vh;
+    border-right: 1px solid rgba(0,0,0,.1);
+}
+.acc-info {
+    float: left;
+    background-color: azure;
+    width: 100%;
+}
+.acc-info img {
+    float: left;
+    padding: 10px;
+    margin-right: 20px;
+    height: 250px;
+}
+.acc-info h3 {
+    margin: 20px;
+}
+.acc-info span {
+    display: block;
+    margin-bottom: 20px;
+}
+
+.blog {
+    padding-top: 3px;
+    float: left;
+    width: 100%;
+}
+.post-field {
+    width: 100%;
+    float: left;
+    padding: 0 3px 3px 3px;
+}
+.blog-post {
+    margin: 10px 10px 0 10px;
+    float: left;
+}
+.blog-post a {
+    color: black;
+}
+.blog-post img {
+    float: left;
+    width: 50px;
+    border-radius: 100%;
+    margin: 0 10px 0 0;
+}
+.blog-post span {
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 1.25rem;
+    line-height: 50px;
+}
+.comment-content {
+    float: right;
+    width: 85%;
+}
+.comment-content form {
+    margin-bottom: 20px !important;
+}
+.com-field {
+    width: 73% !important;
+}
+.comment img {
+    width: 30px;
+}
+.comment span {
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 30px;
+}
+.comment p {
+    padding-left: 39px;
+}
+
+.friend-list {
+    background-color: rgb(226, 225, 225);
+    float: left;
+    width: 20%;
+    height: 100vh;
+}
+.search-friend {
+    float: left;
+    padding: 10px 0;
+    width: 100%;
+    height: fit-content;
+}
+.search-friend input {
+    width: 68% !important;
+}
+.friends {
+    float: left;
+    width: 100%;
+    height: 91vh;
+}
+.friends h5 {
+    text-align: center;
+    padding: 5px 10px;
+    margin: 0;
+}
+.friend {
+    padding: 10px;
+    width: 100%;
+    height: 70px;
+}
+.friend img {
+    float: left;
+    width: 50px;
+    border-radius: 100%;
+}
+.friend p {
+    float: left;
+    font-size: 20px;
+    line-height: 30px;
+    color: black;
+    padding-left: 10px;
+}
+.write-mes {
+    float: left;
+    position: relative;
+    left: 9px;
+    bottom: 20px;
+}
