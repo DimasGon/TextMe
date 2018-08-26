@@ -9,7 +9,7 @@
 <div class="acc-content scroll">
     <div class="acc-info btm-border">
         {% if account.avatar %}
-            <img src="" alt="">
+            <img src="/main_app/uploads/{{ account.avatar }}" alt="">
         {% else %}
             <img src="{% static 'staticfiles/img/default-logo.jpg' %}">
         {% endif %}

@@ -10,7 +10,7 @@ class MesUser(AbstractUser):
     email = models.EmailField(verbose_name='Эллектронный адрес')
     birth_place = models.CharField(max_length=50, verbose_name='Место рождения')
     birth_date = models.DateField(verbose_name='Дата рождения')
-    avatar = models.ImageField(null=True, verbose_name='Аватар')
+    avatar = models.ImageField(null=True, verbose_name='Аватар', upload_to='users_logo/')
     signin_date = models.DateTimeField(auto_now_add=True)
 
 def before_save(sender, instance, created=None, **kwargs):

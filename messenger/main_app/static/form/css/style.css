@@ -41,12 +41,11 @@ h1 {
     color: #fff;
     font-weight: 100;
 }
-/*-- main --*/
 .agileits {
-    padding: 5em 0 0;
+    padding: 10px 0 0;
 }
 .w3-agileits-info {
-    width: 26%;
+    width: 40%;
     margin: 4em auto;
 }
 .input-group-addon { 
@@ -208,31 +207,11 @@ form.animate-form .form-group.has-success .form-control-feedback {
 	-o-transform: scale(1);
 	transform: scale(1); 
 }
-/*-- //agileits --*/
-/*-- copyright --*/
-.w3-agile-copyright { 
-    text-align: center;
-	margin:7em 0 0;
+.a-href {
+    font-size: 1.5em;
+    color: #00bcd4;
+    margin: 20px;
 }
-.w3-agile-copyright p {
-    font-size: 0.9em;
-    color: #fff;
-    line-height: 1.8em;
-    letter-spacing: 1px;
-}
-.w3-agile-copyright p a{
-    color: #6fd653; 
-	-webkit-transition: 0.5s all;
-	-moz-transition: 0.5s all;
-	-o-transition: 0.5s all;
-	-ms-transition: 0.5s all;
-	transition: 0.5s all;
-}
-.w3-agile-copyright p a:hover{
-    color: #fff;	
-}
-/*-- //copyright --*/
-/*-- responsive-design --*/
 @media(max-width:1440px){
 .w3-agileits-info {
     width: 29%; 
@@ -310,10 +289,6 @@ h1 {
 .w3-agileits-info {
     width: 71%;
 }
-.w3-agile-copyright p {
-    font-size: 0.85em; 
-    letter-spacing: 0px;
-}
 }
 @media(max-width:414px){
 form { 
@@ -351,9 +326,6 @@ form {
 }
 p.w3agileits {
     font-size: 1.2em; 
-}
-.w3-agile-copyright {
-    margin: 2em 0 0;
 }
 }
 /*-- //responsive-design --*/
