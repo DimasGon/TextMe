@@ -11,16 +11,20 @@
         {% if account.avatar %}
             <img src="" alt="">
         {% else %}
-            <img src="{% static 'messenger/img/default-logo.jpg' %}">
+            <img src="{% static 'staticfiles/img/default-logo.jpg' %}">
         {% endif %}
         <h3>{{ account.first_name }} {{ account.second_name }}</h3>
         {% if account.birth_place %}
-            <p>Рождён в {{ account.birth_place }}</p>        
+            <p>{{ account.birth_place }}</p>        
         {% endif %}
         {% if account.birth_date %}
-            <span>Родился {{account.birth_date}}</span>
+            <span>{{account.birth_date}}</span>
         {% endif %}
         <button type="button" class="btn btn-primary bottom">Добавить в друзья</button>
+        <form class="form-inline" style="margin-top:3px">
+            <input type="text" class="form-control mr-1" placeholder="Сообщение">
+            <button type="submit" class="btn btn-primary">Написать</button>
+        </form>
     </div>
     <div class="blog">
         <div class="post-field">
@@ -33,7 +37,7 @@
         </div>
         <div class="blog-post">
             <a href="/accounts/id">
-                <img src="{% static 'messenger/img/friend.jpg' %}">
+                <img src="{% static 'staticfiles/img/friend.jpg' %}">
                 <span>Диана Кретова</span>
             </a>
             <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptates, dolorum mollitia eligendi numquam corporis quaerat! Qui illo doloribus est quidem totam quia dolore, sunt quae tempora, enim corrupti consequuntur animi, similique nulla unde doloremque reiciendis. Culpa pariatur esse enim tempora est, sint consequatur vero, fuga, totam eos perferendis exercitationem facere.</p>
@@ -45,14 +49,14 @@
                 <!-- Комментарий -->
                 <div class="comment">
                     <a href="/accounts/id">
-                        <img src="{% static 'messenger/img/logo.jpg' %}">
+                        <img src="{% static 'staticfiles/img/logo.jpg' %}">
                         <span>Дима Гончар</span>
                     </a>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam soluta sed suscipit ipsam maxime quae nulla, corporis asperiores incidunt animi.</p>
                 </div>
                 <div class="comment">
                     <a href="/accounts/id">
-                        <img src="{% static 'messenger/img/friend.jpg' %}">
+                        <img src="{% static 'staticfiles/img/friend.jpg' %}">
                         <span>Диана Кретова</span>
                     </a>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam soluta sed suscipit ipsam maxime quae nulla, corporis asperiores incidunt animi.</p>
@@ -61,7 +65,7 @@
         </div>
         <div class="blog-post">
             <a href="/accounts/id">
-                <img src="{% static 'messenger/img/logo.jpg' %}">
+                <img src="{% static 'staticfiles/img/logo.jpg' %}">
                 <span>Дима Гончар</span>
             </a>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, mollitia quaerat provident autem, consequuntur possimus, debitis minima officiis consequatur libero voluptas? Totam, fuga! Eveniet, placeat blanditiis debitis quia eligendi sit, accusamus provident quae, et unde laudantium id maxime. Unde dicta at facilis nihil exercitationem iure nobis vitae dolores distinctio adipisci tenetur obcaecati architecto dolorum nesciunt est, officiis ea impedit cum id? Cum quia dolor nulla odit dicta. Asperiores, tempore repellat?</p>
@@ -86,105 +90,7 @@
         <h5 class="btm-border">20 друзей</h5>
         <div class="friend btm-border">
             <a href="/accounts/id">
-                <img src="{% static 'messenger/img/friend.jpg' %}">
-                <p>Диана Кретова</p>
-            </a>
-            <a class="write-mes" href="/id">Написать сообщение</a>
-        </div>
-        <div class="friend btm-border">
-            <a href="/accounts/id">
-                <img src="{% static 'messenger/img/friend.jpg' %}">
-                <p>Диана Кретова</p>
-            </a>
-            <a class="write-mes" href="/id">Написать сообщение</a>
-        </div>
-        <div class="friend btm-border">
-            <a href="/accounts/id">
-                <img src="{% static 'messenger/img/friend.jpg' %}">
-                <p>Диана Кретова</p>
-            </a>
-            <a class="write-mes" href="/id">Написать сообщение</a>
-        </div>
-        <div class="friend btm-border">
-            <a href="/accounts/id">
-                <img src="{% static 'messenger/img/friend.jpg' %}">
-                <p>Диана Кретова</p>
-            </a>
-            <a class="write-mes" href="/id">Написать сообщение</a>
-        </div>
-        <div class="friend btm-border">
-            <a href="/accounts/id">
-                <img src="{% static 'messenger/img/friend.jpg' %}">
-                <p>Диана Кретова</p>
-            </a>
-            <a class="write-mes" href="/id">Написать сообщение</a>
-        </div>
-        <div class="friend btm-border">
-            <a href="/accounts/id">
-                <img src="{% static 'messenger/img/friend.jpg' %}">
-                <p>Диана Кретова</p>
-            </a>
-            <a class="write-mes" href="/id">Написать сообщение</a>
-        </div>
-        <div class="friend btm-border">
-            <a href="/accounts/id">
-                <img src="{% static 'messenger/img/friend.jpg' %}">
-                <p>Диана Кретова</p>
-            </a>
-            <a class="write-mes" href="/id">Написать сообщение</a>
-        </div>
-        <div class="friend btm-border">
-            <a href="/accounts/id">
-                <img src="{% static 'messenger/img/friend.jpg' %}">
-                <p>Диана Кретова</p>
-            </a>
-            <a class="write-mes" href="/id">Написать сообщение</a>
-        </div>
-        <div class="friend btm-border">
-            <a href="/accounts/id">
-                <img src="{% static 'messenger/img/friend.jpg' %}">
-                <p>Диана Кретова</p>
-            </a>
-            <a class="write-mes" href="/id">Написать сообщение</a>
-        </div>
-        <div class="friend btm-border">
-            <a href="/accounts/id">
-                <img src="{% static 'messenger/img/friend.jpg' %}">
-                <p>Диана Кретова</p>
-            </a>
-            <a class="write-mes" href="/id">Написать сообщение</a>
-        </div>
-        <div class="friend btm-border">
-            <a href="/accounts/id">
-                <img src="{% static 'messenger/img/friend.jpg' %}">
-                <p>Диана Кретова</p>
-            </a>
-            <a class="write-mes" href="/id">Написать сообщение</a>
-        </div>
-        <div class="friend btm-border">
-            <a href="/accounts/id">
-                <img src="{% static 'messenger/img/friend.jpg' %}">
-                <p>Диана Кретова</p>
-            </a>
-            <a class="write-mes" href="/id">Написать сообщение</a>
-        </div>
-        <div class="friend btm-border">
-            <a href="/accounts/id">
-                <img src="{% static 'messenger/img/friend.jpg' %}">
-                <p>Диана Кретова</p>
-            </a>
-            <a class="write-mes" href="/id">Написать сообщение</a>
-        </div>
-        <div class="friend btm-border">
-            <a href="/accounts/id">
-                <img src="{% static 'messenger/img/friend.jpg' %}">
-                <p>Диана Кретова</p>
-            </a>
-            <a class="write-mes" href="/id">Написать сообщение</a>
-        </div>
-        <div class="friend btm-border">
-            <a href="/accounts/id">
-                <img src="{% static 'messenger/img/friend.jpg' %}">
+                <img src="{% static 'staticfiles/img/friend.jpg' %}">
                 <p>Диана Кретова</p>
             </a>
             <a class="write-mes" href="/id">Написать сообщение</a>
