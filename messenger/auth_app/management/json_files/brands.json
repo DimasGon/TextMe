@@ -1,0 +1,17 @@
+[
+    {
+        "id": 31,
+        "name": "Lacoste",
+        "image": "brands/lacoste-logo.png"
+    },
+    {
+        "id": 32,
+        "name": "Tommy Hilfiger",
+        "image": "brands/tommy-hilfiger-logo_u3hFQmp.png"
+    },
+    {
+        "id": 33,
+        "name": "Champion",
+        "image": "brands/champion-logo.png"
+    }
+]
