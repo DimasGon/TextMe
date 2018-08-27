@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'staticfiles/css/index.css' %}">
+    <title>TextMe</title>
+</head>
+<body style="background-image: url({% static 'staticfiles/img/background.jpg' %})">
+    <div class="opacity">
+        <div class="text">
+            <h1>TextMe</h1>
+            <p>Для того, чтобы воспользоваться мессенджером вы должны <a href="/account/login">войти в аккаунт</a>.</p>
+            <p>Нет аккаунта? <a href="/account/signin">Зарегистрируйтесь!</a></p>
+        </div>
+    </div>
+</body>
+</html>
