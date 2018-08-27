@@ -8,18 +8,39 @@
 <!-- Блок аккаунта и стена  -->
 <div class="acc-content scroll">
     <div class="acc-info btm-border">
-        {% if account.avatar %}
-            <img src="/main_app/uploads/{{ account.avatar }}" alt="">
+
+        {% if account.id == user.id %}
+        
+            {% if account.avatar %}
+                <img src="/main_app/uploads/{{ account.avatar }}" alt="">
+            {% else %}
+                <a href=""></a> <img src="{% static 'staticfiles/img/default-logo.jpg' %}">
+            {% endif %}
+            <h3>{{ account.first_name }} {{ account.second_name }}</h3>
+            {% if account.birth_place %}
+                <p>{{ account.birth_place }}</p>        
+            {% endif %}
+            {% if account.birth_date %}
+                <span>{{account.birth_date}}</span>
+            {% endif %}
+
         {% else %}
-            <img src="{% static 'staticfiles/img/default-logo.jpg' %}">
+        
+            {% if account.avatar %}
+                <img src="/main_app/uploads/{{ account.avatar }}" alt="">
+            {% else %}
+                <img src="{% static 'staticfiles/img/default-logo.jpg' %}">
+            {% endif %}
+            <h3>{{ account.first_name }} {{ account.second_name }}</h3>
+            {% if account.birth_place %}
+                <p>{{ account.birth_place }}</p>        
+            {% endif %}
+            {% if account.birth_date %}
+                <span>{{account.birth_date}}</span>
+            {% endif %}
+
         {% endif %}
-        <h3>{{ account.first_name }} {{ account.second_name }}</h3>
-        {% if account.birth_place %}
-            <p>{{ account.birth_place }}</p>        
-        {% endif %}
-        {% if account.birth_date %}
-            <span>{{account.birth_date}}</span>
-        {% endif %}
+
         <button type="button" class="btn btn-primary bottom">Добавить в друзья</button>
         <form class="form-inline" style="margin-top:3px">
             <input type="text" class="form-control mr-1" placeholder="Сообщение">

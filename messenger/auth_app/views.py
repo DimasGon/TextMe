@@ -1,17 +1,11 @@
 from django.shortcuts import render, redirect
-from django.views.generic import FormView, TemplateView, DetailView
+from django.views.generic import FormView, TemplateView
 from django.contrib.auth import login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import authenticate
 from . import models
 from . import forms
 from main_app import mixins
-
-class AccountView(LoginRequiredMixin, DetailView):
-
-    model = models.MesUser
-    template_name = 'auth_app/account.html'
-    context_object_name = 'account'
 
 class LogInView(mixins.AnonRequired, FormView):
     
@@ -35,7 +29,7 @@ class LogInView(mixins.AnonRequired, FormView):
 
         form = self.form_class(request.POST)
 
-        return render(request, 'auth_app/form.html', {'form': form})
+        return render(request, 'auth_app/form.html', {'form': form, 'title': 'Вход'})
 
     def get_context_data(self, *args, **kwargs):
 

@@ -1,0 +1,47 @@
+html, body {
+    padding: 0;
+    margin: 0;
+}
+/* #3498db */
+body {
+    width: 100%;
+    height: 100vh;
+    background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-color: rgb(43, 43, 221);
+}
+.opacity {
+    background-color: rgb(43, 43, 221);
+    opacity: 0.4;
+    width: 100%;
+    height: 100vh;
+}
+.text {
+    text-align: center;
+    padding: 5% 10% 0 50%;
+    font-size: 30px;
+    font-style: italic;
+    font-weight: 100;
+    color: azure;
+}
+.text h1 {
+    font-family: fantasy;
+    font-style: normal;
+    font-size: 40px;
+}
+.text a {
+    text-decoration: none;
+    color: white;
+    transition: 0.5s linear;
+    font-weight: 900;
+}
+.text a:hover {
+    color: cyan;
+}
+
+@media (max-width: 978px) {
+    .text {
+        padding: 10% 5% 0 45%
+    }
+}
