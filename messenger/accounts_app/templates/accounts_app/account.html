@@ -23,6 +23,9 @@
             {% if account.birth_date %}
                 <span>{{account.birth_date}}</span>
             {% endif %}
+            <a href="/logout">
+                <button type="button" class="btn btn-primary bottom">Выйти</button>
+            </a>
 
         {% else %}
         
@@ -39,13 +42,13 @@
                 <span>{{account.birth_date}}</span>
             {% endif %}
 
-        {% endif %}
+            <button type="button" class="btn btn-primary bottom">Добавить в друзья</button>
+            <form class="form-inline" style="margin-top:3px">
+                <input type="text" class="form-control mr-1" placeholder="Сообщение">
+                <button type="submit" class="btn btn-primary">Написать</button>
+            </form>
 
-        <button type="button" class="btn btn-primary bottom">Добавить в друзья</button>
-        <form class="form-inline" style="margin-top:3px">
-            <input type="text" class="form-control mr-1" placeholder="Сообщение">
-            <button type="submit" class="btn btn-primary">Написать</button>
-        </form>
+        {% endif %}
     </div>
     <div class="blog">
         <div class="post-field">
