@@ -99,6 +99,16 @@ li {
 }
 
 /* ------------------------ СТИЛИ ЧАТА ------------------------ */
+.empty-chat {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    width: 70%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
 
 .chat-content {
     float: left;
