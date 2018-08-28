@@ -1,5 +1,6 @@
 from django import forms
 from auth_app.models import MesUser
+from accounts_app.models import AccountModel
 
 class SignInForm(forms.ModelForm):
 
@@ -41,6 +42,8 @@ class SignInForm(forms.ModelForm):
         user = super(SignInForm, self).save(commit=False)
         user.set_password(self.cleaned_data.get('password'))
         user.save()
+
+        AccountModel(user=user).save()
 
         return user
 

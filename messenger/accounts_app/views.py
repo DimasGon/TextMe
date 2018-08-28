@@ -1,11 +1,11 @@
 from django.shortcuts import render
 from django.views.generic import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from auth_app import models
+from . import models
 
 class AccountView(LoginRequiredMixin, DetailView):
 
-    model = models.MesUser
+    model = models.AccountModel
     template_name = 'accounts_app/account.html'
     context_object_name = 'account'
 
@@ -14,12 +14,12 @@ class AccountView(LoginRequiredMixin, DetailView):
         search_acc = self.request.GET.get('q')
             
         try:
-            search_acc = models.MesUser.objects.get(username=search_acc)
-        except models.MesUser.DoesNotExist:
+            search_acc = models.AccountModel.objects.get(user__username=search_acc)
+        except models.AccountModel.DoesNotExist:
             search_acc = None
 
-        if search_acc and search_acc != self.request.user:
-            context['search_acc'] = search_acc
+        if search_acc and search_acc.user != self.request.user:
+            context['search_acc'] = search_acc.user
         else:
             context['search_acc'] = 'Нет совпадений'
 

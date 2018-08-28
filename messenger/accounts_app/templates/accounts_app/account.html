@@ -9,19 +9,19 @@
 <div class="acc-content scroll">
     <div class="acc-info btm-border">
 
-        {% if account.id == user.id %}
+        {% if account.user.id == user.id %}
         
-            {% if account.avatar %}
-                <img src="/main_app/uploads/{{ account.avatar }}" alt="">
+            {% if account.user.avatar %}
+                <img src="/main_app/uploads/{{ account.user.avatar }}" alt="">
             {% else %}
                 <a href=""></a> <img src="{% static 'staticfiles/img/default-logo.jpg' %}">
             {% endif %}
-            <h3>{{ account.first_name }} {{ account.second_name }}</h3>
-            {% if account.birth_place %}
-                <p>{{ account.birth_place }}</p>        
+            <h3>{{ account.user.first_name }} {{ account.user.second_name }}</h3>
+            {% if account.user.birth_place %}
+                <p>{{ account.user.birth_place }}</p>        
             {% endif %}
-            {% if account.birth_date %}
-                <span>{{account.birth_date}}</span>
+            {% if account.user.birth_date %}
+                <span>{{account.user.birth_date}}</span>
             {% endif %}
             <a href="/logout">
                 <button type="button" class="btn btn-primary bottom">Выйти</button>
@@ -29,17 +29,17 @@
 
         {% else %}
         
-            {% if account.avatar %}
-                <img src="/main_app/uploads/{{ account.avatar }}" alt="">
+            {% if account.user.avatar %}
+                <img src="/main_app/uploads/{{ account.user.avatar }}" alt="">
             {% else %}
                 <img src="{% static 'staticfiles/img/default-logo.jpg' %}">
             {% endif %}
-            <h3>{{ account.first_name }} {{ account.second_name }}</h3>
-            {% if account.birth_place %}
-                <p>{{ account.birth_place }}</p>        
+            <h3>{{ account.user.first_name }} {{ account.user.second_name }}</h3>
+            {% if account.user.birth_place %}
+                <p>{{ account.user.birth_place }}</p>        
             {% endif %}
-            {% if account.birth_date %}
-                <span>{{account.birth_date}}</span>
+            {% if account.user.birth_date %}
+                <span>{{account.user.birth_date}}</span>
             {% endif %}
 
             <button type="button" class="btn btn-primary bottom">Добавить в друзья</button>
@@ -105,7 +105,7 @@
 <!-- Левый блок друзей -->
 <div class="friend-list">
     <div class="search-friend btm-border">
-        <form action="/account/{{ account.id }}" class="form-inline">
+        <form action="/account/{{ account.user.id }}" class="form-inline">
             <input type="text" name="q" class="form-control" placeholder="Поиск друга">
             <button type="submit" class="btn btn-primary">Найти</button>
         </form>
