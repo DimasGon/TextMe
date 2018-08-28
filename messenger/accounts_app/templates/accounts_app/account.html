@@ -105,20 +105,42 @@
 <!-- Левый блок друзей -->
 <div class="friend-list">
     <div class="search-friend btm-border">
-        <form class="form-inline">
-            <input type="text" class="form-control" placeholder="Поиск друга">
+        <form action="/account/{{ account.id }}" class="form-inline">
+            <input type="text" name="q" class="form-control" placeholder="Поиск друга">
             <button type="submit" class="btn btn-primary">Найти</button>
         </form>
     </div>
     <div class="friends scroll">
-        <h5 class="btm-border">20 друзей</h5>
-        <div class="friend btm-border">
-            <a href="/accounts/id">
-                <img src="{% static 'staticfiles/img/friend.jpg' %}">
-                <p>Диана Кретова</p>
-            </a>
-            <a class="write-mes" href="/id">Написать сообщение</a>
-        </div>
+        {% if search_acc == 'Нет совпадений' %}
+            <h5 class="btm-border">Нет совпадений</h5>
+        
+        {% elif search_acc %}
+            <h5>Найденный аккаунт:</h5>
+            <div class="friend btm-border">
+                <a href="/account/{{ search_acc.id }}">
+
+                    {% if search_acc.avatar %}
+                        <img src="/main_app/uploads/{{ search_acc.avatar }}">
+                    {% else %}
+                        <img src="{% static 'staticfiles/img/default-logo.jpg' %}">
+                    {% endif %}
+
+                    <p>{{ search_acc.first_name }} {{ search_acc.second_name }}</p>
+                </a>
+                <a class="write-mes" href="/id">Написать сообщение</a>
+            </div>
+
+        {% else %}
+            <h5 class="btm-border">20 друзей</h5>
+            <div class="friend btm-border">
+                <a href="/accounts/id">
+                    <img src="{% static 'staticfiles/img/friend.jpg' %}">
+                    <p>Диана Кретова</p>
+                </a>
+                <a class="write-mes" href="/id">Написать сообщение</a>
+            </div>
+        
+            {% endif %}
     </div>
 </div>
 
