@@ -39,6 +39,7 @@ class SignInForm(forms.ModelForm):
     def save(self):
 
         user = super(SignInForm, self).save(commit=False)
+        user.set_password(self.cleaned_data.get('password'))
         user.save()
 
         return user
