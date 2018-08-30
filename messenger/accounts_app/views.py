@@ -25,6 +25,17 @@ class AccountView(LoginRequiredMixin, DetailView):
 
         return context
 
+    def get_context_data(self, **kwargs):
+
+        context = super().get_context_data(**kwargs)
+        account = context['account']
+        context['wallposts'] = account.get_wallposts()
+        
+        if self.request.GET.get('q'):
+            context = self.get_search(context)
+
+        return context
+
     def post_wallpost(self, account_id):
         
         author = self.request.user
@@ -41,17 +52,6 @@ class AccountView(LoginRequiredMixin, DetailView):
         post = models.WallPostModel.objects.get(id=to_post)
 
         models.CommentModel(author=author, comment_text=comment_text, to_post=post).save()
-
-    def get_context_data(self, **kwargs):
-
-        context = super().get_context_data(**kwargs)
-        account = context['account']
-        context['wallposts'] = account.get_wallposts()
-        
-        if self.request.GET.get('q'):
-            context = self.get_search(context)
-
-        return context
 
     def post(self, request, pk):
 
