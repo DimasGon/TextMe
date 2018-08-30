@@ -11,3 +11,8 @@ class MesUser(AbstractUser):
     birth_date = models.DateField(verbose_name='Дата рождения')
     avatar = models.ImageField(null=True, verbose_name='Аватар', upload_to='users_logo/')
     signin_date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+
+        verbose_name = 'Пользователь'
+        verbose_name_plural = 'Пользователи'
