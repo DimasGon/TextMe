@@ -3,7 +3,8 @@ from auth_app.models import MesUser
 
 class AccountModel(models.Model):
 
-    user = models.ForeignKey(MesUser, on_delete=models.CASCADE)
+    user = models.ForeignKey(MesUser, on_delete=models.CASCADE, related_name='Пользователь')
+    bookmarks = models.ManyToManyField(MesUser, related_name='Закладки')
 
     def get_wallposts(self):
 

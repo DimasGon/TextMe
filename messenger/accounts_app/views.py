@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.views.generic import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from auth_app.models import MesUser
 from . import models
 
 class AccountView(LoginRequiredMixin, DetailView):
@@ -30,7 +31,11 @@ class AccountView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         account = context['account']
         context['wallposts'] = account.get_wallposts()
-        
+
+        user_acc = models.AccountModel.objects.get(user=self.request.user)
+        context['bookmarks'] = user_acc.bookmarks.all()
+        context['bookmarks_amount'] = len(context['bookmarks'])
+
         if self.request.GET.get('q'):
             context = self.get_search(context)
 
@@ -53,6 +58,13 @@ class AccountView(LoginRequiredMixin, DetailView):
 
         models.CommentModel(author=author, comment_text=comment_text, to_post=post).save()
 
+    def post_add_to_bookmarks(self, bookmark_user_id):
+
+        bookmark = MesUser.objects.get(id=bookmark_user_id)
+
+        user_acc = models.AccountModel.objects.get(user=self.request.user)
+        user_acc.bookmarks.add(bookmark)
+
     def post(self, request, pk):
 
         if request.POST.get('wallpost'):
@@ -60,5 +72,8 @@ class AccountView(LoginRequiredMixin, DetailView):
 
         elif request.POST.get('comment'):
             self.post_comment()
+
+        elif request.POST.get('bookmark'):
+            self.post_add_to_bookmarks(request.POST.get('bookmark'))
 
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
