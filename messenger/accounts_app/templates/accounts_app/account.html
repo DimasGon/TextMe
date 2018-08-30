@@ -59,6 +59,21 @@
                 <button type="submit" class="btn btn-primary btn-right-align">Создать запись</button>
             </form>
         </div>
+        
+        {% for post in wallposts %}
+            <div class="blog-post">
+                <a href="/account/{{ post.author.id }}">
+                    {% if post.author.avatar %}
+                        <img src="/main_app/uploads/{{ post.author.avatar }}" alt="">
+                    {% else %}
+                        <img src="{% static 'staticfiles/img/default-logo.jpg' %}">
+                    {% endif %}
+                    <span>{{ post.author.first_name }} {{ post.author.second_name }}</span>
+                </a>
+                <p>{{ post.post_text }}</p>
+            </div>
+        {% endfor %}
+
         <div class="blog-post">
             <a href="/accounts/id">
                 <img src="{% static 'staticfiles/img/friend.jpg' %}">
