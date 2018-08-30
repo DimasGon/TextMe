@@ -273,6 +273,7 @@ li {
 .blog-post {
     margin: 10px 10px 0 10px;
     float: left;
+    width: 100%;
 }
 .blog-post a {
     color: black;

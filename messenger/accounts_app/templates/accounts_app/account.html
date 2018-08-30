@@ -52,9 +52,10 @@
     </div>
     <div class="blog">
         <div class="post-field">
-            <form>
+            <form method="POST">
+                {% csrf_token %}
                 <div class="form-group no-mg">
-                    <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="Чем вы хотите поделиться?"></textarea>
+                    <textarea class="form-control" name="wallpost" rows="3" placeholder="Чем вы хотите поделиться?"></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary btn-right-align">Создать запись</button>
             </form>
@@ -71,34 +72,57 @@
                     <span>{{ post.author.first_name }} {{ post.author.second_name }}</span>
                 </a>
                 <p>{{ post.post_text }}</p>
+                <div class="comment-content">
+                    <form method="POST" class="form-inline no-mg">
+                        {% csrf_token %}
+                        <input type="text" name="comment" class="form-control mr-sm-2 com-field" placeholder="Комментарий">
+                        <button type="submit" name="to_post" value="{{ post.id }}" class="btn btn-primary btn-right-align">Сохранить</button>
+                    </form>
+                    
+                    <!-- Комментарий -->
+                    {% for comment in post.comments %}
+                        <div class="comment">
+                            <a href="/account/{{ comment.author.id }}">
+                                {% if post.author.avatar %}
+                                    <img src="/main_app/uploads/{{ comment.author.avatar }}" alt="">
+                                {% else %}
+                                    <img src="{% static 'staticfiles/img/default-logo.jpg' %}">
+                                {% endif %}
+                                <span>{{ comment.author.first_name }} {{ comment.author.second_name }}</span>
+                            </a>
+                            <p>{{ comment.comment_text }}</p>
+                        </div>
+                    {% endfor %}
+                    
+                </div>
             </div>
         {% endfor %}
-
-        <div class="blog-post">
+ 
+        <!-- <div class="blog-post">
             <a href="/accounts/id">
                 <img src="{% static 'staticfiles/img/friend.jpg' %}">
                 <span>Диана Кретова</span>
             </a>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptates, dolorum mollitia eligendi numquam corporis quaerat! Qui illo doloribus est quidem totam quia dolore, sunt quae tempora, enim corrupti consequuntur animi, similique nulla unde doloremque reiciendis. Culpa pariatur esse enim tempora est, sint consequatur vero, fuga, totam eos perferendis exercitationem facere.</p>
+            <p>Lorem</p>
             <div class="comment-content">
                 <form class="form-inline no-mg">
                     <input type="text" class="form-control mr-sm-2 com-field" placeholder="Комментарий">
                     <button type="submit" class="btn btn-primary btn-right-align">Сохранить</button>
                 </form>
-                <!-- Комментарий -->
+
                 <div class="comment">
                     <a href="/accounts/id">
                         <img src="{% static 'staticfiles/img/logo.jpg' %}">
                         <span>Дима Гончар</span>
                     </a>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam soluta sed suscipit ipsam maxime quae nulla, corporis asperiores incidunt animi.</p>
+                    <p>Lorem ipsum</p>
                 </div>
                 <div class="comment">
                     <a href="/accounts/id">
                         <img src="{% static 'staticfiles/img/friend.jpg' %}">
                         <span>Диана Кретова</span>
                     </a>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam soluta sed suscipit ipsam maxime quae nulla, corporis asperiores incidunt animi.</p>
+                    <p>Lorem</p>
                 </div>
             </div>
         </div>
@@ -114,7 +138,7 @@
                     <button type="submit" class="btn btn-primary btn-right-align">Сохранить</button>
                 </form>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
 <!-- Левый блок друзей -->
