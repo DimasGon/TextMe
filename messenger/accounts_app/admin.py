@@ -3,3 +3,4 @@ from . import models
 
 admin.site.register(models.AccountModel)
 admin.site.register(models.WallPostModel)
+admin.site.register(models.CommentModel)
