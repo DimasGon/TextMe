@@ -1,5 +1,6 @@
 from django.core.management.base import BaseCommand
 from auth_app.models import MesUser
+from accounts_app.models import AccountModel
 import json, os
 
 JSON_PATH = 'messenger/management/json_files/'
@@ -15,6 +16,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
 
         MesUser.objects.all().delete()
+        AccountModel.objects.all().delete()
         
         # brands = load_from_json('brands')
         # for brand in brands:
@@ -28,6 +30,8 @@ class Command(BaseCommand):
         )
         user.save()
         
+        AccountModel(user=user).save()
+        
         if input('Create superuser? (y/n) ') == 'y':
             user = MesUser.objects.create_superuser(
                 username='dimag', password='1234567d', first_name='Дима',
@@ -35,3 +39,5 @@ class Command(BaseCommand):
                 birth_date='1990-10-10', email=None
             )
             user.save()
+
+            AccountModel(user=user).save()

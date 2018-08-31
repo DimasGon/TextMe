@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.conf import settings
-from django.db.models.signals import pre_save, post_save
 
 class MesUser(AbstractUser):
 
@@ -12,3 +11,11 @@ class MesUser(AbstractUser):
     birth_date = models.DateField(verbose_name='Дата рождения')
     avatar = models.ImageField(null=True, verbose_name='Аватар', upload_to='users_logo/')
     signin_date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+
+        verbose_name = 'Пользователь'
+        verbose_name_plural = 'Пользователи'
+
+    def __str__(self):
+        return self.username

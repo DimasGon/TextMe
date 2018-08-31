@@ -58,7 +58,7 @@ li {
     overflow: auto;
 }
 ::-webkit-scrollbar {
-    width: 6px;
+    width: 0;
 }
 ::-webkit-scrollbar-track {
     -webkit-box-shadow: none;
@@ -249,7 +249,6 @@ li {
     float: left;
     width: 50%;
     height: 100vh;
-    border-right: 1px solid rgba(0,0,0,.1);
 }
 .acc-info {
     float: left;
@@ -281,8 +280,12 @@ li {
     padding: 0 3px 3px 3px;
 }
 .blog-post {
-    margin: 10px 10px 0 10px;
+    padding: 10px 10px 0 10px;
     float: left;
+    width: 100%;
+    background-color: rgb(226, 225, 225);
+    border-radius: 28px;
+    margin-bottom: 20px;
 }
 .blog-post a {
     color: black;
@@ -298,6 +301,9 @@ li {
     font-weight: 500;
     font-size: 1.25rem;
     line-height: 50px;
+}
+.blog-post p {
+    margin-left: 60px;
 }
 .comment-content {
     float: right;
@@ -320,6 +326,7 @@ li {
 }
 .comment p {
     padding-left: 39px;
+    margin-left: 0;
 }
 
 .friend-list {
