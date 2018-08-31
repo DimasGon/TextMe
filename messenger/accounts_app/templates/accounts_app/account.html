@@ -51,7 +51,7 @@
                 </form>
             {% endif %}
 
-            <a href="/chat/id">Написать сообщение</a>
+            <a href="/chat/{{ account.user.id }}">Написать сообщение</a>
 
         {% endif %}
     </div>
@@ -130,7 +130,7 @@
 
                     <p>{{ search_acc.first_name }} {{ search_acc.second_name }}</p>
                 </a>
-                <a class="write-mes" href="/id">Написать сообщение</a>
+                <a class="write-mes" href="/chat/{{ search_acc.id }}">Написать сообщение</a>
             </div>
 
         {% elif bookmarks %}
@@ -147,7 +147,7 @@
                         {% endif %}
                         <p>{{ user.first_name }} {{ user.second_name }}</p>
                     </a>
-                    <a class="write-mes" href="/id">Написать сообщение</a>
+                    <a class="write-mes" href="/chat/{{ user.id }}">Написать сообщение</a>
                 </div>
             {% endfor %}
 
