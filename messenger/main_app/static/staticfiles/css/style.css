@@ -153,7 +153,8 @@ li {
     display: -webkit-flex;
     display: flex;
     align-items: center;
-    align-content: center;
+    justify-content: center;
+    text-align: center;
     float: left;
     height: 77vh;
     width: 100%;
