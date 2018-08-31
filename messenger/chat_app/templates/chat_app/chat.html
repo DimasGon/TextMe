@@ -11,7 +11,7 @@ TextMe - Диалоги
 
 {% block content %}
 
-{% if show == True %}
+{% if show == 'чат' %}
 
     <!-- Блок чата -->
     <div class="chat-content">
@@ -102,6 +102,43 @@ TextMe - Диалоги
             <img src="img/Endless.jpg">
             <img src="img/motiv.jpg">
             <img src="img/willsmith.jpg">
+        </div>
+    </div>
+
+{% elif show == 'Начало чата' %}
+
+    <div class="chat-content">
+        <!-- С кем чат -->
+        <div class="chat-with-person">
+            Чат с: <a href="/accounts/id.html">Диана Кретова</a>
+        </div>
+        <hr>
+        <!-- Окно чата -->
+        <div class="empty-window scroll">
+            Вы еще не общались.<br>
+            Напишите "Привет!"
+        </div>
+        <!-- Поле для ввода текста сообщения -->
+        <div class="mes-field">
+            <form>
+                <div class="form-group no-mg file-upload">
+                    <input type="text" class="form-control" placeholder="Введите текст сообщения">
+                    <label>
+                        <input type="file" class="not-full-line"><span><i class="icon-paperclip"></i></span>
+                    </label>
+                    <button type="submit" class="btn btn-primary btn-right-align">Отправить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Информация о собеседнике -->
+    <div class="interlocutor-content scroll">
+        <div class="il-info">
+            <img src="img/friend.jpg">
+            <h3>Диана Кретова</h3>
+            <p>Украина, Харьков</p>
+            <span>07.06.2005</span>
+            <hr>
         </div>
     </div>
 
