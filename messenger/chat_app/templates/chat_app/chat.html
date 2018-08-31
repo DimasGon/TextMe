@@ -19,18 +19,6 @@ TextMe - Диалоги
         <!-- Окно чата -->
         <div class="chat-window scroll">
             <!-- Каждый ul для одного сообщения -->
-            <ul class="mes-container">
-                <li class="user-mes">Сообщение пользователя 1 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eaque accusamus perspiciatis rem voluptatem blanditiis voluptates, rerum, hic corporis magni vel odit molestiae eveniet? Modi animi ut culpa aperiam! Nesciunt, commodi.<span>12:03</span></li>
-            </ul>
-            <ul class="mes-container">
-                <li class="user-mes">Сообщение пользователя 2<span>12:03</span></li>
-            </ul>
-            <ul class="mes-container">
-                <li class="friend-mes">Сообщение друга 1 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Expedita laborum nam quos eum unde assumenda autem, nihil nulla magni consequuntur!<span>12:03</span></li>
-            </ul>
-            <ul class="mes-container">
-                <li class="user-mes">Сообщение пользователя 3<span>12:03</span></li>
-            </ul>
 
             {% for mes in messages %}
 
@@ -48,12 +36,13 @@ TextMe - Диалоги
         <!-- Поле для ввода текста сообщения -->
         <div class="mes-field">
             <form method="POST">
+            {% csrf_token %}
                 <div class="form-group no-mg file-upload">
                     <input type="text" name="mes_text" class="form-control" placeholder="Введите текст сообщения">
                     <label>
                         <input type="file" class="not-full-line"><span><i class="icon-paperclip"></i></span>
                     </label>
-                    <button type="submit" name="partner_id" value="{{ partner.id }}" class="btn btn-primary btn-right-align">Отправить</button>
+                    <button type="submit" class="btn btn-primary btn-right-align">Отправить</button>
                 </div>
             </form>
         </div>
@@ -104,12 +93,13 @@ TextMe - Диалоги
         <!-- Поле для ввода текста сообщения -->
         <div class="mes-field">
             <form method="POST">
+            {% csrf_token %}
                 <div class="form-group no-mg file-upload">
                     <input type="text" name="mes_text" class="form-control" placeholder="Введите текст сообщения">
                     <label>
                         <input type="file" class="not-full-line"><span><i class="icon-paperclip"></i></span>
                     </label>
-                    <button type="submit" name="partner_id" value="{{ partner.id }}" class="btn btn-primary btn-right-align">Отправить</button>
+                    <button type="submit" class="btn btn-primary btn-right-align">Отправить</button>
                 </div>
             </form>
         </div>
