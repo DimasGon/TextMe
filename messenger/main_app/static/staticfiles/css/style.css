@@ -99,6 +99,16 @@ li {
 }
 
 /* ------------------------ СТИЛИ ЧАТА ------------------------ */
+.empty-chat {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    width: 70%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
 
 .chat-content {
     float: left;
@@ -130,6 +140,20 @@ li {
     align-items: flex-end;
     align-content: flex-end;
     flex-direction: column-reverse;
+    float: left;
+    height: 77vh;
+    width: 100%;
+}
+.empty-window {
+    -ms-box-orient: horizontal;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    align-content: center;
     float: left;
     height: 77vh;
     width: 100%;
