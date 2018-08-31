@@ -11,13 +11,13 @@ TextMe - Диалоги
 
 {% block content %}
 
-{% if show == 'чат' %}
+{% if show == 'chat' %}
 
     <!-- Блок чата -->
     <div class="chat-content">
         <!-- С кем чат -->
         <div class="chat-with-person">
-            Чат с: <a href="/accounts/id.html">Диана Кретова</a>
+            Чат с: <a href="/account/{{ partner.id }}">{{ partner.first_name }} {{ partner.second_name }}</a>
         </div>
         <hr>
         <!-- Окно чата -->
@@ -35,46 +35,29 @@ TextMe - Диалоги
             <ul class="mes-container">
                 <li class="user-mes">Сообщение пользователя 3<span>12:03</span></li>
             </ul>
-            <ul class="mes-container">
-                <li class="friend-mes">Сообщение друга 2<span>12:03</span></li>
-            </ul>
-            <ul class="mes-container">
-                <li class="friend-mes">Сообщение друга 3<span>12:03</span></li>
-            </ul>
-            <ul class="mes-container">
-                <li class="user-mes">Сообщение пользователя 4<span>12:03</span></li>
-            </ul>
-            <ul class="mes-container">
-                <li class="user-mes">Сообщение пользователя 5<span>12:03</span></li>
-            </ul>
-            <ul class="mes-container">
-                <li class="friend-mes">Сообщение друга 4<span>12:03</span></li>
-            </ul>
-            <ul class="mes-container">
-                <li class="friend-mes">Сообщение друга 5 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, magnam.<span>12:03</span></li>
-            </ul>
-            <ul class="mes-container">
-                <li class="friend-mes">Сообщение друга 6<span>12:03</span></li>
-            </ul>
-            <ul class="mes-container">
-                <li class="user-mes">Сообщение пользователя 6<span>12:03</span></li>
-            </ul>
-            <ul class="mes-container">
-                <li class="user-mes">Сообщение пользователя 7<span>12:03</span></li>
-            </ul>
-            <ul class="mes-container">
-                <li class="friend-mes">Сообщение друга 7<span>12:03</span></li>
-            </ul>
+
+            {% for mes in messages %}
+
+                <ul class="mes-container">
+                    {% if mes.sender.id == user.id %}
+                        <li class="user-mes">{{ mes.text }}<span>{{ mes.time }}</span></li>
+                    {% else %}
+                        <li class="friend-mes">{{ mes.text }}<span>{{ mes.time }}</span></li>
+                    {% endif %}
+                </ul>
+
+            {% endfor %}
+
         </div>
         <!-- Поле для ввода текста сообщения -->
         <div class="mes-field">
-            <form>
+            <form method="POST">
                 <div class="form-group no-mg file-upload">
-                    <input type="text" class="form-control" placeholder="Введите текст сообщения">
+                    <input type="text" name="mes_text" class="form-control" placeholder="Введите текст сообщения">
                     <label>
                         <input type="file" class="not-full-line"><span><i class="icon-paperclip"></i></span>
                     </label>
-                    <button type="submit" class="btn btn-primary btn-right-align">Отправить</button>
+                    <button type="submit" name="partner_id" value="{{ partner.id }}" class="btn btn-primary btn-right-align">Отправить</button>
                 </div>
             </form>
         </div>
@@ -82,10 +65,14 @@ TextMe - Диалоги
     <!-- Информация о собеседнике -->
     <div class="interlocutor-content scroll">
         <div class="il-info">
-            <img src="img/friend.jpg">
-            <h3>Диана Кретова</h3>
-            <p>Украина, Харьков</p>
-            <span>07.06.2005</span>
+            {% if partner.avatar %}
+                <img src="/main_app/uploads/{{ partner.avatar }}" alt="">
+            {% else %}
+                <img src="{% static 'staticfiles/img/default-logo.jpg' %}">
+            {% endif %}
+            <h3>{{ partner.first_name }} {{ partner.second_name }}</h3>
+            <p>{{ partner.birth_place }}</p>
+            <span>{{ partner.birth_date }}</span>
             <hr>
         </div>
         <div class="shared-photos">
@@ -105,12 +92,12 @@ TextMe - Диалоги
         </div>
     </div>
 
-{% elif show == 'Начало чата' %}
+{% elif show == 'start' %}
 
     <div class="chat-content">
         <!-- С кем чат -->
         <div class="chat-with-person">
-            Чат с: <a href="/accounts/id.html">Диана Кретова</a>
+            Чат с: <a href="/account/{{ partner.id }}">{{ partner.first_name }} {{ partner.second_name }}</a>
         </div>
         <hr>
         <!-- Окно чата -->
@@ -120,13 +107,13 @@ TextMe - Диалоги
         </div>
         <!-- Поле для ввода текста сообщения -->
         <div class="mes-field">
-            <form>
+            <form method="POST">
                 <div class="form-group no-mg file-upload">
-                    <input type="text" class="form-control" placeholder="Введите текст сообщения">
+                    <input type="text" name="mes_text" class="form-control" placeholder="Введите текст сообщения">
                     <label>
                         <input type="file" class="not-full-line"><span><i class="icon-paperclip"></i></span>
                     </label>
-                    <button type="submit" class="btn btn-primary btn-right-align">Отправить</button>
+                    <button type="submit" name="partner_id" value="{{ partner.id }}" class="btn btn-primary btn-right-align">Отправить</button>
                 </div>
             </form>
         </div>
@@ -134,10 +121,14 @@ TextMe - Диалоги
     <!-- Информация о собеседнике -->
     <div class="interlocutor-content scroll">
         <div class="il-info">
-            <img src="img/friend.jpg">
-            <h3>Диана Кретова</h3>
-            <p>Украина, Харьков</p>
-            <span>07.06.2005</span>
+            {% if partner.avatar %}
+                <img src="/main_app/uploads/{{ partner.avatar }}" alt="">
+            {% else %}
+                <img src="{% static 'staticfiles/img/default-logo.jpg' %}">
+            {% endif %}
+            <h3>{{ partner.first_name }} {{ partner.second_name }}</h3>
+            <p>{{ partner.birth_place }}</p>
+            <span>{{ partner.birth_date }}</span>
             <hr>
         </div>
     </div>
