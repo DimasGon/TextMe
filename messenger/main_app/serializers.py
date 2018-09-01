@@ -1,9 +1,9 @@
 from rest_framework import serializers
 import chat_app.models as chat_app
 
-class ThreadSerializer(serializers.ModelSerializer):
+class MesUserSerializer(serializers.ModelSerializer):
 
     class Meta:
 
-        model = chat_app.ThreadModel
-        fields = '__all__'
+        model = chat_app.MesUser
+        fields = ('id', 'first_name', 'second_name', 'avatar')

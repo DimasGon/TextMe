@@ -14,8 +14,13 @@ class ThreadApiView(View):
         threads = chat_app.ThreadModel.objects.filter(
             participants=request.user).order_by('-last_message_time')
 
-        serializer = serializers.ThreadSerializer(threads, many=True)
+        partners = list()
 
-        print('\n\n', serializer)
+        for thread in threads:
 
-        return HttpResponse(json.dumps(serializer.data))
+            partner = thread.get_partner(request.user)
+            partners.append(partner)
+
+        serializer = serializers.MesUserSerializer(partners, many=True)
+
+        return HttpResponse(serializer.data)

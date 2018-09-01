@@ -7,6 +7,12 @@ class ThreadModel(models.Model):
     participants = models.ManyToManyField(MesUser)
     last_message_time = models.DateTimeField(auto_now_add=False, blank=True, null=True)
 
+    def get_partner(self, user):
+
+        for obj in self.participants.all():
+            if obj != user:
+                return obj
+
 class MessageModel(models.Model):
 
     text = models.TextField(verbose_name='Текст сообщения')
