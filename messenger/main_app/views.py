@@ -23,4 +23,4 @@ class ThreadApiView(View):
 
         serializer = serializers.MesUserSerializer(partners, many=True)
 
-        return HttpResponse(serializer.data)
+        return HttpResponse(json.dumps({'result': serializer.data}, ensure_ascii=False))
