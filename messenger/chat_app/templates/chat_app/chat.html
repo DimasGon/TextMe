@@ -50,11 +50,7 @@ TextMe - Диалоги
     <!-- Информация о собеседнике -->
     <div class="interlocutor-content scroll">
         <div class="il-info">
-            {% if partner.avatar %}
-                <img src="/main_app/uploads/{{ partner.avatar }}" alt="">
-            {% else %}
-                <img src="{% static 'staticfiles/img/default-logo.jpg' %}">
-            {% endif %}
+            <img src="/main_app/uploads/{{ partner.avatar }}" alt="">
             <h3>{{ partner.first_name }} {{ partner.second_name }}</h3>
             <p>{{ partner.birth_place }}</p>
             <span>{{ partner.birth_date }}</span>
@@ -107,11 +103,7 @@ TextMe - Диалоги
     <!-- Информация о собеседнике -->
     <div class="interlocutor-content scroll">
         <div class="il-info">
-            {% if partner.avatar %}
-                <img src="/main_app/uploads/{{ partner.avatar }}" alt="">
-            {% else %}
-                <img src="{% static 'staticfiles/img/default-logo.jpg' %}">
-            {% endif %}
+            <img src="/main_app/uploads/{{ partner.avatar }}" alt="">
             <h3>{{ partner.first_name }} {{ partner.second_name }}</h3>
             <p>{{ partner.birth_place }}</p>
             <span>{{ partner.birth_date }}</span>
