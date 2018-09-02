@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+TextMe - Диалоги
+{% endblock title %}
+
+{% block content %}
+
+{% if show == 'chat' %}
+
+    <!-- Блок чата -->
+    <div class="chat-content">
+        <!-- С кем чат -->
+        <div class="chat-with-person">
+            Чат с: <a href="/account/{{ partner.id }}">{{ partner.first_name }} {{ partner.second_name }}</a>
+        </div>
+        <hr>
+        <!-- Окно чата -->
+        <div class="chat-window scroll">
+            <!-- Каждый ul для одного сообщения -->
+
+            {% for mes in messages %}
+
+                <ul class="mes-container">
+                    {% if mes.sender.id == user.id %}
+                        <li class="user-mes">{{ mes.text }}<span>{{ mes.time }}</span></li>
+                    {% else %}
+                        <li class="friend-mes">{{ mes.text }}<span>{{ mes.time }}</span></li>
+                    {% endif %}
+                </ul>
+
+            {% endfor %}
+
+        </div>
+        <!-- Поле для ввода текста сообщения -->
+        <div class="mes-field">
+            <form method="POST">
+            {% csrf_token %}
+                <div class="form-group no-mg file-upload">
+                    <input type="text" name="mes_text" class="form-control" placeholder="Введите текст сообщения">
+                    <label>
+                        <input type="file" class="not-full-line"><span><i class="icon-paperclip"></i></span>
+                    </label>
+                    <button type="submit" class="btn btn-primary btn-right-align">Отправить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Информация о собеседнике -->
+    <div class="interlocutor-content scroll">
+        <div class="il-info">
+            {% if partner.avatar %}
+                <img src="/main_app/uploads/{{ partner.avatar }}" alt="">
+            {% else %}
+                <img src="{% static 'staticfiles/img/default-logo.jpg' %}">
+            {% endif %}
+            <h3>{{ partner.first_name }} {{ partner.second_name }}</h3>
+            <p>{{ partner.birth_place }}</p>
+            <span>{{ partner.birth_date }}</span>
+            <hr>
+        </div>
+        <div class="shared-photos">
+            <p><span><i class="icon-images-gallery"></i></span> ОБЩИЕ ФОТО</p>
+            <img src="img/photo.jpg">
+            <img src="img/Endless.jpg">
+            <img src="img/motiv.jpg">
+            <img src="img/willsmith.jpg">
+            <img src="img/photo.jpg">
+            <img src="img/Endless.jpg">
+            <img src="img/motiv.jpg">
+            <img src="img/willsmith.jpg">
+            <img src="img/photo.jpg">
+            <img src="img/Endless.jpg">
+            <img src="img/motiv.jpg">
+            <img src="img/willsmith.jpg">
+        </div>
+    </div>
+
+{% elif show == 'start' %}
+
+    <div class="chat-content">
+        <!-- С кем чат -->
+        <div class="chat-with-person">
+            Чат с: <a href="/account/{{ partner.id }}">{{ partner.first_name }} {{ partner.second_name }}</a>
+        </div>
+        <hr>
+        <!-- Окно чата -->
+        <div class="empty-window scroll">
+            Вы еще не общались.<br>
+            Напишите "Привет!"
+        </div>
+        <!-- Поле для ввода текста сообщения -->
+        <div class="mes-field">
+            <form method="POST">
+            {% csrf_token %}
+                <div class="form-group no-mg file-upload">
+                    <input type="text" name="mes_text" class="form-control" placeholder="Введите текст сообщения">
+                    <label>
+                        <input type="file" class="not-full-line"><span><i class="icon-paperclip"></i></span>
+                    </label>
+                    <button type="submit" class="btn btn-primary btn-right-align">Отправить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Информация о собеседнике -->
+    <div class="interlocutor-content scroll">
+        <div class="il-info">
+            {% if partner.avatar %}
+                <img src="/main_app/uploads/{{ partner.avatar }}" alt="">
+            {% else %}
+                <img src="{% static 'staticfiles/img/default-logo.jpg' %}">
+            {% endif %}
+            <h3>{{ partner.first_name }} {{ partner.second_name }}</h3>
+            <p>{{ partner.birth_place }}</p>
+            <span>{{ partner.birth_date }}</span>
+            <hr>
+        </div>
+    </div>
+
+{% else %}
+
+    <div class="empty-chat">
+        Окно чата пусто! <br>
+        Напишите кому-нибудь или выберите диалог на панели слева
+    </div>
+
+{% endif %}
+    
+{% endblock content %}
