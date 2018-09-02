@@ -1,14 +1,23 @@
 from django.shortcuts import render, HttpResponseRedirect
-from django.views.generic import DetailView
+from django.views.generic import DetailView, UpdateView, View
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django import forms
 from auth_app.models import MesUser
-from . import models
+from . import models, forms
+
+class AccountRedirectView(LoginRequiredMixin, View):
+
+    login_url = '/login'
+
+    def get(self, request):
+        return HttpResponseRedirect('/account/{}'. format(request.user.id))
 
 class AccountView(LoginRequiredMixin, DetailView):
 
     model = models.AccountModel
     template_name = 'accounts_app/account.html'
     context_object_name = 'account'
+    login_url = '/login'
 
     def get_search(self, context):
 
@@ -77,3 +86,11 @@ class AccountView(LoginRequiredMixin, DetailView):
             self.post_add_to_bookmarks(request.POST.get('bookmark'))
 
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+class AccountSettingsView(LoginRequiredMixin, UpdateView):
+    
+    login_url = '/login'
+    success_url = '/account'
+    template_name = 'accounts_app/form.html'
+    model = MesUser
+    form_class = forms.AccountUpdateForm

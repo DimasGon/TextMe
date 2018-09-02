@@ -11,30 +11,22 @@
 
         {% if account.user.id == user.id %}
         
-            {% if account.user.avatar %}
-                <img src="/main_app/uploads/{{ account.user.avatar }}" alt="">
-            {% else %}
-                <a href=""></a> <img src="{% static 'staticfiles/img/default-logo.jpg' %}">
+            <img src="/main_app/uploads/{{ user.avatar }}" alt="">
+            <h3>{{ user.first_name }} {{ user.second_name }}</h3>
+            {% if user.birth_place %}
+                <p>{{ user.birth_place }}</p>
             {% endif %}
-            <h3>{{ account.user.first_name }} {{ account.user.second_name }}</h3>
-            {% if account.user.birth_place %}
-                <p>{{ account.user.birth_place }}</p>        
-            {% endif %}
-            {% if account.user.birth_date %}
-                <span>{{account.user.birth_date}}</span>
+            {% if user.birth_date %}
+                <span>{{user.birth_date}}</span>
             {% endif %}
             <a href="/logout">
                 <button type="button" class="btn btn-primary bottom">Выйти</button>
-            </a>
+            </a> <br>
+            <a class="under-button" href="/account/{{ user.id }}/edit_profile">Настройки аккаунта</a>
 
         {% else %}
-        
-            {% if account.user.avatar %}
-                <img src="/main_app/uploads/{{ account.user.avatar }}" alt="">
-            {% else %}
-                <img src="{% static 'staticfiles/img/default-logo.jpg' %}">
-            {% endif %}
 
+            <img src="/main_app/uploads/{{ account.user.avatar }}" alt="">
             <h3>{{ account.user.first_name }} {{ account.user.second_name }}</h3>
 
             {% if account.user.birth_place %}
@@ -51,7 +43,7 @@
                 </form>
             {% endif %}
 
-            <a href="/chat/{{ account.user.id }}">Написать сообщение</a>
+            <a class="under-button" href="/chat/{{ account.user.id }}">Написать сообщение</a>
 
         {% endif %}
     </div>
@@ -69,11 +61,7 @@
         {% for post in wallposts %}
             <div class="blog-post">
                 <a href="/account/{{ post.author.id }}">
-                    {% if post.author.avatar %}
-                        <img src="/main_app/uploads/{{ post.author.avatar }}" alt="">
-                    {% else %}
-                        <img src="{% static 'staticfiles/img/default-logo.jpg' %}">
-                    {% endif %}
+                    <img src="/main_app/uploads/{{ post.author.avatar }}" alt="">
                     <span>{{ post.author.first_name }} {{ post.author.second_name }}</span>
                 </a>
                 <p>{{ post.post_text }}</p>
@@ -88,11 +76,7 @@
                     {% for comment in post.comments %}
                         <div class="comment">
                             <a href="/account/{{ comment.author.id }}">
-                                {% if comment.author.avatar %}
-                                    <img src="/main_app/uploads/{{ comment.author.avatar }}" alt="">
-                                {% else %}
-                                    <img src="{% static 'staticfiles/img/default-logo.jpg' %}">
-                                {% endif %}
+                                <img src="/main_app/uploads/{{ comment.author.avatar }}" alt="">
                                 <span>{{ comment.author.first_name }} {{ comment.author.second_name }}</span>
                             </a>
                             <p>{{ comment.comment_text }}</p>
@@ -121,13 +105,7 @@
             <h5>Найденный аккаунт:</h5>
             <div class="friend btm-border">
                 <a href="/account/{{ search_acc.id }}">
-
-                    {% if search_acc.avatar %}
-                        <img src="/main_app/uploads/{{ search_acc.avatar }}">
-                    {% else %}
-                        <img src="{% static 'staticfiles/img/default-logo.jpg' %}">
-                    {% endif %}
-
+                    <img src="/main_app/uploads/{{ search_acc.avatar }}">
                     <p>{{ search_acc.first_name }} {{ search_acc.second_name }}</p>
                 </a>
                 <a class="write-mes" href="/chat/{{ search_acc.id }}">Написать сообщение</a>
@@ -140,11 +118,7 @@
             {% for user in bookmarks %}
                 <div class="friend btm-border">
                     <a href="/account/{{ user.id }}">
-                        {% if user.avatar %}
-                            <img src="/main_app/uploads/{{ user.avatar }}">
-                        {% else %}
-                            <img src="{% static 'staticfiles/img/default-logo.jpg' %}">
-                        {% endif %}
+                        <img src="/main_app/uploads/{{ user.avatar }}">
                         <p>{{ user.first_name }} {{ user.second_name }}</p>
                     </a>
                     <a class="write-mes" href="/chat/{{ user.id }}">Написать сообщение</a>

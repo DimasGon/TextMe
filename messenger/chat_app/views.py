@@ -1,12 +1,16 @@
 from django.shortcuts import render, HttpResponseRedirect, Http404
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView, View
 from auth_app.models import MesUser
 from . import models
 
-class EmptyChatView(TemplateView):
+class EmptyChatView(LoginRequiredMixin, TemplateView):
+    login_url = '/login'
     template_name = 'chat_app/chat.html'
 
-class StartChatView(View):
+class StartChatView(LoginRequiredMixin, View):
+    
+    login_url = '/login'
 
     def get(self, request, partner_id):
 
@@ -36,7 +40,9 @@ class StartChatView(View):
 
         return HttpResponseRedirect('/chat/{}'.format(partner_id))
 
-class ChatView(View):
+class ChatView(LoginRequiredMixin, View):
+    
+    login_url = '/login'
     
     def get(self, request, partner_id):
 
