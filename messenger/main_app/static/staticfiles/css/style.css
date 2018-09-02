@@ -81,7 +81,7 @@ li {
 }
 .left-content h5 {
     color: black;
-    margin: 10px 0 0 0;
+    margin: 5px 0 0 0;
     padding-left: 17px;
     width: 71%;
     white-space: nowrap;
@@ -96,9 +96,29 @@ li {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    margin-bottom: 0;
+}
+.left-content span {
+    padding-left: 17px;
+    color: grey;
+    text-align: right;
+    font-size: 15px;
+    width: 71%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* ------------------------ СТИЛИ ЧАТА ------------------------ */
+.empty-chat {
+    font-size: 30px;
+    width: 70%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
 
 .chat-content {
     float: left;
@@ -130,6 +150,21 @@ li {
     align-items: flex-end;
     align-content: flex-end;
     flex-direction: column-reverse;
+    float: left;
+    height: 77vh;
+    width: 100%;
+}
+.empty-window {
+    -ms-box-orient: horizontal;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     float: left;
     height: 77vh;
     width: 100%;
@@ -257,6 +292,10 @@ li {
 .acc-info span {
     display: block;
     margin-bottom: 20px;
+}
+.under-button {
+    float: left;
+    padding-top: 17px;
 }
 
 .blog {
