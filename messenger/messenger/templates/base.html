@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="{% static 'staticfiles/css/bootstrap-reboot.min.css' %}">
     <link rel="stylesheet" href="{% static 'staticfiles/css/whhg.css' %}">
     {% block css %}{% endblock css %}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
     {% block js %}{% endblock js %}
     <title>{% block title %}{% endblock title %}</title>
 </head>
@@ -36,18 +38,17 @@
     </div>
     <hr>
     <!-- Часть левого меню хранящая ссылки на чаты -->
-    <div class="chats scroll">
-        <a href="/id">
-            <div class="left-content btm-border">
-                <img src="{% static 'staticfiles/img/friend.jpg' %}">
-                <h5>Диана Кретова</h5>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing</p>
-            </div>
-        </a>
-    </div>
+    <div id="chats" class="chats scroll"></div>
 </div>
 
 {% block content %}{% endblock content %}
+
+{% block page_js %}{% endblock page_js %}
+<script type="text/javascript" src="{% static 'staticfiles/js/chats_api.js' %}"></script>
+<script>
+    axios.get('http://127.0.0.1:8000/chats_api')
+        .then(renderChat)
+</script>
 
 </body>
 </html>

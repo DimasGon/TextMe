@@ -9,6 +9,7 @@ class AccountView(LoginRequiredMixin, DetailView):
     model = models.AccountModel
     template_name = 'accounts_app/account.html'
     context_object_name = 'account'
+    login_url = '/login'
 
     def get_search(self, context):
 

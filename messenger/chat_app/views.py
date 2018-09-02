@@ -1,12 +1,16 @@
 from django.shortcuts import render, HttpResponseRedirect, Http404
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView, View
 from auth_app.models import MesUser
 from . import models
 
-class EmptyChatView(TemplateView):
+class EmptyChatView(LoginRequiredMixin, TemplateView):
+    login_url = '/login'
     template_name = 'chat_app/chat.html'
 
-class StartChatView(View):
+class StartChatView(LoginRequiredMixin, View):
+    
+    login_url = '/login'
 
     def get(self, request, partner_id):
 
@@ -14,23 +18,15 @@ class StartChatView(View):
             partner = MesUser.objects.get(id=partner_id)
 
         except MesUser.DoesNotExist:
-            return Http404()
-
-        thread = models.ThreadModel.objects.filter(
-            participants=partner).filter(participants=request.user)
-
-        if thread.exists():
-            return HttpResponseRedirect('/chat/{}'.format(partner_id))
+            raise Http404('Пользователя не существует')
 
         return render(request, 'chat_app/chat.html', {
             'partner': partner,
             'show': 'start',
         })
 
-    def post(self, request):
+    def post(self, request, partner_id):
         
-        partner_id = request.POST.get('partner_id')
-        print('\n\nPOST STARTCHAT PARTNER_ID TYPE: {}\n\n'.format(type(partner_id)))
         mes_text = request.POST.get('mes_text')
         
         user = request.user
@@ -41,11 +37,12 @@ class StartChatView(View):
 
         message = models.MessageModel(text=mes_text, sender=user, thread=thread)
         message.save()
-        print('MESSAGE: ', message, '\n\n')
 
         return HttpResponseRedirect('/chat/{}'.format(partner_id))
 
-class ChatView(View):
+class ChatView(LoginRequiredMixin, View):
+    
+    login_url = '/login'
     
     def get(self, request, partner_id):
 
@@ -53,7 +50,7 @@ class ChatView(View):
             partner = MesUser.objects.get(id=partner_id)
 
         except MesUser.DoesNotExist:
-            return Http404()
+            raise Http404('Пользователя не существует')
 
         thread = models.ThreadModel.objects.filter(
             participants=partner).filter(participants=request.user)
@@ -61,10 +58,35 @@ class ChatView(View):
         if not thread:
             return HttpResponseRedirect('/chat/start_messaging/{}'.format(partner_id))
 
-        messages = thread.messagemodel_set.order_by('-time')
+        thread = thread[0]
+
+        messages = thread.messagemodel_set.model.objects.filter(
+            thread=thread).order_by('-time')
 
         return render(request, 'chat_app/chat.html', {
             'partner': partner,
             'messages': messages,
             'show': 'chat',
         })
+
+    def post(self, request, partner_id):
+
+        try:
+            partner = MesUser.objects.get(id=partner_id)
+
+        except MesUser.DoesNotExist:
+            raise Http404('Пользователя не существует')
+
+        thread = models.ThreadModel.objects.filter(
+            participants=partner).filter(participants=request.user)
+
+        if not thread:
+            return HttpResponseRedirect('/chat/start_messaging/{}'.format(partner_id))
+
+        thread = thread[0]
+
+        mes_text = request.POST.get('mes_text')
+        message = models.MessageModel(text=mes_text, sender=request.user, thread=thread)
+        message.save()
+
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
