@@ -27,8 +27,6 @@ class SignInForm(forms.ModelForm):
 
     def clean_password_confirm(self):
 
-        print('-------------\n{}\n-------------'.format(self.cleaned_data))
-
         password = self.cleaned_data.get('password')
         password_confirm = self.cleaned_data.get('password_confirm')
 
