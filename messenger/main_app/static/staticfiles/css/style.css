@@ -197,7 +197,13 @@ li {
 }
 .user-mes img {
     border-radius: 30px;
-    width: 60%;
+    width: 100%;
+    display: block;
+    float: right;
+}
+.user-mes span {
+    float: right;
+    display: block;
 }
 .friend-mes {
     margin: 0 10% 5px 5px;
@@ -205,6 +211,16 @@ li {
     background-color: rgb(224, 243, 172);
     font-size: 16px;
     float: left;
+}
+.friend-mes img {
+    border-radius: 30px;
+    width: 100%;
+    display: block;
+    float: left;
+}
+.friend-mes span {
+    float: left;
+    display: block;
 }
 
 .mes-field {
