@@ -6,6 +6,7 @@ class ThreadModel(models.Model):
 
     participants = models.ManyToManyField(MesUser)
     last_message_time = models.DateTimeField(auto_now_add=False, blank=True, null=True)
+    last_message_text = models.TextField()
 
     def get_partner(self, user):
 
@@ -20,13 +21,14 @@ class MessageModel(models.Model):
     thread = models.ForeignKey(ThreadModel, on_delete=models.CASCADE)
     time = models.DateTimeField(auto_now_add=True)
 
-def update_last_message_time(sender, instance, created, **kwargs):
+def update_last_thread(sender, instance, created, **kwargs):
 
     if not created:
         return
     
     thread = ThreadModel.objects.get(id=instance.thread.id)
     thread.last_message_time = instance.time
+    thread.last_message_text = instance.text
     thread.save()
 
-post_save.connect(update_last_message_time, MessageModel)
+post_save.connect(update_last_thread, MessageModel)

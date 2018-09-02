@@ -23,4 +23,11 @@ class ThreadApiView(View):
 
         serializer = serializers.MesUserSerializer(partners, many=True)
 
+        for user in serializer.data:
+            
+            thread = threads.filter(participants=user['id'])[0]
+            user['last_message_text'] = thread.last_message_text
+            time = thread.last_message_time
+            user['last_message_time'] = ':'.join([str(time.hour + 3), str(time.minute)])
+
         return HttpResponse(json.dumps({'result': serializer.data}, ensure_ascii=False))

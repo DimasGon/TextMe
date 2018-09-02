@@ -1,9 +1,10 @@
-const Chats = ({id, first_name, second_name, avatar}) => (
+const Chats = ({id, first_name, second_name, last_message_text, last_message_time, avatar}) => (
     `<a href="/chat/${ id }">
         <div class="left-content btm-border">
             <img src="${ avatar }">
             <h5>${ first_name } ${ second_name }</h5>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing</p>
+            <p>${ last_message_text }</p>
+            <span>${ last_message_time }</span>
         </div>
     </a>`
 )
