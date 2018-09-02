@@ -24,6 +24,7 @@ li {
     height: 45px;
     border-radius: 100%;
     margin-bottom: 10px;
+    resize: none;
 }
 
 .left-menu {
@@ -75,7 +76,8 @@ li {
 }
 .left-content img {
     float: left;
-    max-height: 75px;
+    height: 75px;
+    width: 100%
     margin-left: 5%;
     border-radius: 100%;
 }
@@ -192,6 +194,10 @@ li {
     font-size: 16px;
     text-align: right;
     float: right;
+}
+.user-mes img {
+    border-radius: 30px;
+    width: 60%;
 }
 .friend-mes {
     margin: 0 10% 5px 5px;
