@@ -3,7 +3,7 @@ from django.views.generic import DetailView, UpdateView, View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django import forms
 from auth_app.models import MesUser
-from . import models, forms
+from . import models
 
 class AccountRedirectView(LoginRequiredMixin, View):
 
@@ -91,6 +91,6 @@ class AccountSettingsView(LoginRequiredMixin, UpdateView):
     
     login_url = '/login'
     success_url = '/account'
-    template_name = 'accounts_app/form.html'
     model = MesUser
-    form_class = forms.AccountUpdateForm
+    fields = ('first_name', 'second_name', 'email', 'birth_place', 'birth_date', 'avatar')
+    template_name = 'accounts_app/form.html'

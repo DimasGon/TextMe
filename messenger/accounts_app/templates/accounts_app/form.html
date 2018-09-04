@@ -1,5 +1,6 @@
 {% extends "base_form.html" %}
 {% load static %}
+{% load widget_tweaks %}
 
 {% block title %}
 Настройки аккаунта
@@ -15,7 +16,7 @@
 {% endfor %}
 {% for field in form %}
     <div class="form-group has-feedback wthree">
-        {{ field }}
+        {% render_field field class="form-control" %}
         {% for error in field.errors %}
             {{ error }}
         {% endfor %}

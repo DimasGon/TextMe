@@ -20,6 +20,7 @@ class MessageModel(models.Model):
     sender = models.ForeignKey(MesUser, on_delete=models.DO_NOTHING)
     thread = models.ForeignKey(ThreadModel, on_delete=models.CASCADE)
     time = models.DateTimeField(auto_now_add=True)
+    image = models.ImageField(null=True, blank=True, upload_to='chat_images/')
 
 def update_last_thread(sender, instance, created, **kwargs):
 

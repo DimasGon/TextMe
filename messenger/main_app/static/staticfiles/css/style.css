@@ -24,6 +24,7 @@ li {
     height: 45px;
     border-radius: 100%;
     margin-bottom: 10px;
+    resize: none;
 }
 
 .left-menu {
@@ -75,7 +76,8 @@ li {
 }
 .left-content img {
     float: left;
-    max-height: 75px;
+    height: 75px;
+    width: 100%
     margin-left: 5%;
     border-radius: 100%;
 }
@@ -193,12 +195,32 @@ li {
     text-align: right;
     float: right;
 }
+.user-mes img {
+    border-radius: 30px;
+    width: 100%;
+    display: block;
+    float: right;
+}
+.user-mes span {
+    float: right;
+    display: block;
+}
 .friend-mes {
     margin: 0 10% 5px 5px;
     border-radius: 20px 20px 20px 5px;
     background-color: rgb(224, 243, 172);
     font-size: 16px;
     float: left;
+}
+.friend-mes img {
+    border-radius: 30px;
+    width: 100%;
+    display: block;
+    float: left;
+}
+.friend-mes span {
+    float: left;
+    display: block;
 }
 
 .mes-field {
