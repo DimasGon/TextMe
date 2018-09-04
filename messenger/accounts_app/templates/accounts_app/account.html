@@ -11,20 +11,21 @@
 
         {% if account.user.id == user.id %}
         
-            <img src="/main_app/uploads/{{ account.user.avatar }}" alt="">
-            <h3>{{ account.user.first_name }} {{ account.user.second_name }}</h3>
-            {% if account.user.birth_place %}
-                <p>{{ account.user.birth_place }}</p>        
+            <img src="/main_app/uploads/{{ user.avatar }}" alt="">
+            <h3>{{ user.first_name }} {{ user.second_name }}</h3>
+            {% if user.birth_place %}
+                <p>{{ user.birth_place }}</p>
             {% endif %}
-            {% if account.user.birth_date %}
-                <span>{{account.user.birth_date}}</span>
+            {% if user.birth_date %}
+                <span>{{user.birth_date}}</span>
             {% endif %}
             <a href="/logout">
                 <button type="button" class="btn btn-primary bottom">Выйти</button>
-            </a>
+            </a> <br>
+            <a class="under-button" href="/account/{{ user.id }}/edit_profile">Настройки аккаунта</a>
 
         {% else %}
-        
+
             <img src="/main_app/uploads/{{ account.user.avatar }}" alt="">
             <h3>{{ account.user.first_name }} {{ account.user.second_name }}</h3>
 
@@ -42,7 +43,7 @@
                 </form>
             {% endif %}
 
-            <a href="/chat/{{ account.user.id }}">Написать сообщение</a>
+            <a class="under-button" href="/chat/{{ account.user.id }}">Написать сообщение</a>
 
         {% endif %}
     </div>
