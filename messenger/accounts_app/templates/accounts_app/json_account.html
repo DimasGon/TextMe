@@ -31,9 +31,10 @@
             {% endif %}
 
             {% if not account.user in bookmarks %}
-                <form method="POST">
+                <form method="POST" action="/account/{{ account.user.id }}" class="js-add-bookmarks">
                     {% csrf_token %}
-                    <button type="submit" name="bookmark" value="{{ account.user.id }}" class="btn btn-primary bottom">Добавить в закладки</button>
+                    <input type="hidden" name="bookmark" value="{{ account.user.id }}">
+                    <button type="submit" class="btn btn-primary bottom">Добавить в закладки</button>
                 </form>
             {% endif %}
 
@@ -42,44 +43,9 @@
         {% endif %}
     </div>
     <div class="blog">
-        <div class="post-field">
-            <form method="POST">
-                {% csrf_token %}
-                <div class="form-group no-mg">
-                    <textarea class="form-control" name="wallpost" rows="3" placeholder="Чем вы хотите поделиться?"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary btn-right-align">Создать запись</button>
-            </form>
+        <div id="wallposts">
+            {% include "accounts_app/includes/json_wallposts.html" %}
         </div>
-        
-        {% for post in wallposts %}
-            <div class="blog-post">
-                <a href="/account/{{ post.author.id }}">
-                    <img src="/main_app/uploads/{{ post.author.avatar }}" alt="">
-                    <span>{{ post.author.first_name }} {{ post.author.second_name }}</span>
-                </a>
-                <p>{{ post.post_text }}</p>
-                <div class="comment-content">
-                    <form method="POST" class="form-inline no-mg">
-                        {% csrf_token %}
-                        <input type="text" name="comment" class="form-control mr-sm-2 com-field" placeholder="Комментарий">
-                        <button type="submit" name="to_post" value="{{ post.id }}" class="btn btn-primary btn-right-align">Сохранить</button>
-                    </form>
-                    
-                    <!-- Комментарии -->
-                    {% for comment in post.comments %}
-                        <div class="comment">
-                            <a href="/account/{{ comment.author.id }}">
-                                <img src="/main_app/uploads/{{ comment.author.avatar }}" alt="">
-                                <span>{{ comment.author.first_name }} {{ comment.author.second_name }}</span>
-                            </a>
-                            <p>{{ comment.comment_text }}</p>
-                        </div>
-                    {% endfor %}
-                    
-                </div>
-            </div>
-        {% endfor %}
 
     </div>
 </div>

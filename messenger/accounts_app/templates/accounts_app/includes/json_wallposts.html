@@ -1,0 +1,39 @@
+<div class="post-field">
+    <form method="POST" action="/account/{{ account.user.id }}" class="js-add-post">
+        {% csrf_token %}
+        <div class="form-group no-mg">
+            <textarea class="form-control" name="wallpost" rows="3" placeholder="Чем вы хотите поделиться?"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-right-align">Создать запись</button>
+    </form>
+</div>
+
+{% for post in wallposts %}
+    <div class="blog-post">
+        <a href="/account/{{ post.author.id }}">
+            <img src="/main_app/uploads/{{ post.author.avatar }}" alt="">
+            <span>{{ post.author.first_name }} {{ post.author.second_name }}</span>
+        </a>
+        <p>{{ post.post_text }}</p>
+        <div class="comment-content">
+            <form method="POST" action="/account/{{ account.user.id }}" class="form-inline no-mg js-add-comment">
+                {% csrf_token %}
+                <input type="text" name="comment" class="form-control mr-sm-2 com-field" placeholder="Комментарий">
+                <input type="hidden" name="to_post" value="{{ post.id }}">
+                <button type="submit" class="btn btn-primary btn-right-align">Сохранить</button>
+            </form>
+            
+            <!-- Комментарии -->
+            {% for comment in post.comments %}
+                <div class="comment">
+                    <a href="/account/{{ comment.author.id }}">
+                        <img src="/main_app/uploads/{{ comment.author.avatar }}" alt="">
+                        <span>{{ comment.author.first_name }} {{ comment.author.second_name }}</span>
+                    </a>
+                    <p>{{ comment.comment_text }}</p>
+                </div>
+            {% endfor %}
+            
+        </div>
+    </div>
+{% endfor %}
