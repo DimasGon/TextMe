@@ -1,9 +1,34 @@
 from django.shortcuts import render, HttpResponseRedirect
+from django.template.loader import render_to_string
+from django.core.serializers.json import DjangoJSONEncoder
+from django.http import JsonResponse
 from django.views.generic import DetailView, UpdateView, View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django import forms
 from auth_app.models import MesUser
 from . import models
+
+class RusJsonResponse(JsonResponse):
+
+    def __init__(self, data, encoder=DjangoJSONEncoder, safe=True, *args, **kwargs):
+        json_dumps_params = dict(ensure_ascii=False)
+        super().__init__(data, encoder, safe, json_dumps_params, *args, **kwargs)
+
+class JSONAccountView(LoginRequiredMixin, View):
+
+    login_url = '/login'
+
+    def get(self, request, pk):
+
+        account = models.AccountModel.objects.get(id=pk)
+
+        html_page = render_to_string(
+            'accounts_app/json_account.html',
+            {'account': account},
+            request
+        )
+
+        return RusJsonResponse({'html_page': html_page})
 
 class AccountRedirectView(LoginRequiredMixin, View):
 
