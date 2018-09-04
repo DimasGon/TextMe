@@ -43,12 +43,13 @@
 
 {% block content %}{% endblock content %}
 
-{% block page_js %}{% endblock page_js %}
+<script type="text/javascript" src="{% static 'staticfiles/js/jquery.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'staticfiles/js/chats_api.js' %}"></script>
 <script>
     axios.get('http://127.0.0.1:8000/chats_api')
         .then(renderChat)
 </script>
+{% block page_js %}{% endblock page_js %}
 
 </body>
 </html>

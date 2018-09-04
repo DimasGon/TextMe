@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect, HttpResponse
 from django.template.loader import render_to_string
 from django.core.serializers.json import DjangoJSONEncoder
 from django.http import JsonResponse
@@ -18,17 +18,23 @@ class JSONAccountView(LoginRequiredMixin, View):
 
     login_url = '/login'
 
-    def get(self, request, pk):
+    def get(self, request):
 
-        account = models.AccountModel.objects.get(id=pk)
+        adress = request.META.get('HTTP_REFERER')
+        id = int(adress[-1:])
+
+        account = models.AccountModel.objects.get(id=id)
+        wallposts = account.get_wallposts()
 
         html_page = render_to_string(
             'accounts_app/json_account.html',
-            {'account': account},
+            {'account': account, 'wallposts': wallposts},
             request
         )
 
         return RusJsonResponse({'html_page': html_page})
+
+        return HttpResponse(adress)
 
 class AccountRedirectView(LoginRequiredMixin, View):
 

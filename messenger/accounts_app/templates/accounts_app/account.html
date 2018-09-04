@@ -6,89 +6,7 @@
 {% block content %}
 
 <!-- Блок аккаунта и стена  -->
-<div class="acc-content scroll">
-    <div class="acc-info btm-border">
-
-        {% if account.user.id == user.id %}
-        
-            <img src="/main_app/uploads/{{ user.avatar }}" alt="">
-            <h3>{{ user.first_name }} {{ user.second_name }}</h3>
-            {% if user.birth_place %}
-                <p>{{ user.birth_place }}</p>
-            {% endif %}
-            {% if user.birth_date %}
-                <span>{{user.birth_date}}</span>
-            {% endif %}
-            <a href="/logout">
-                <button type="button" class="btn btn-primary bottom">Выйти</button>
-            </a> <br>
-            <a class="under-button" href="/account/{{ user.id }}/edit_profile">Настройки аккаунта</a>
-
-        {% else %}
-
-            <img src="/main_app/uploads/{{ account.user.avatar }}" alt="">
-            <h3>{{ account.user.first_name }} {{ account.user.second_name }}</h3>
-
-            {% if account.user.birth_place %}
-                <p>{{ account.user.birth_place }}</p>        
-            {% endif %}
-            {% if account.user.birth_date %}
-                <span>{{account.user.birth_date}}</span>
-            {% endif %}
-
-            {% if not account.user in bookmarks %}
-                <form method="POST">
-                    {% csrf_token %}
-                    <button type="submit" name="bookmark" value="{{ account.user.id }}" class="btn btn-primary bottom">Добавить в закладки</button>
-                </form>
-            {% endif %}
-
-            <a class="under-button" href="/chat/{{ account.user.id }}">Написать сообщение</a>
-
-        {% endif %}
-    </div>
-    <div class="blog">
-        <div class="post-field">
-            <form method="POST">
-                {% csrf_token %}
-                <div class="form-group no-mg">
-                    <textarea class="form-control" name="wallpost" rows="3" placeholder="Чем вы хотите поделиться?"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary btn-right-align">Создать запись</button>
-            </form>
-        </div>
-        
-        {% for post in wallposts %}
-            <div class="blog-post">
-                <a href="/account/{{ post.author.id }}">
-                    <img src="/main_app/uploads/{{ post.author.avatar }}" alt="">
-                    <span>{{ post.author.first_name }} {{ post.author.second_name }}</span>
-                </a>
-                <p>{{ post.post_text }}</p>
-                <div class="comment-content">
-                    <form method="POST" class="form-inline no-mg">
-                        {% csrf_token %}
-                        <input type="text" name="comment" class="form-control mr-sm-2 com-field" placeholder="Комментарий">
-                        <button type="submit" name="to_post" value="{{ post.id }}" class="btn btn-primary btn-right-align">Сохранить</button>
-                    </form>
-                    
-                    <!-- Комментарии -->
-                    {% for comment in post.comments %}
-                        <div class="comment">
-                            <a href="/account/{{ comment.author.id }}">
-                                <img src="/main_app/uploads/{{ comment.author.avatar }}" alt="">
-                                <span>{{ comment.author.first_name }} {{ comment.author.second_name }}</span>
-                            </a>
-                            <p>{{ comment.comment_text }}</p>
-                        </div>
-                    {% endfor %}
-                    
-                </div>
-            </div>
-        {% endfor %}
-
-    </div>
-</div>
+<div id="js-insert-acc"></div>
 <!-- Правый блок друзей -->
 <div class="friend-list">
     <div class="search-friend btm-border">
@@ -133,3 +51,7 @@
 </div>
 
 {% endblock content %}
+
+{% block page_js %}
+<script src="{% static 'accounts_app/js/account.js' %}"></script>
+{% endblock page_js %}
