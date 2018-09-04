@@ -1,0 +1,48 @@
+{% load static %}
+
+<div class="acc-content scroll">
+    <div class="acc-info btm-border">
+
+        {% if account.user.id == user.id %}
+        
+            <img src="/main_app/uploads/{{ user.avatar }}" alt="">
+            <h3>{{ user.first_name }} {{ user.second_name }}</h3>
+            {% if user.birth_place %}
+                <p>{{ user.birth_place }}</p>
+            {% endif %}
+            {% if user.birth_date %}
+                <span>{{user.birth_date}}</span>
+            {% endif %}
+            <a href="/logout">
+                <button type="button" class="btn btn-primary bottom">Выйти</button>
+            </a> <br>
+            <a class="under-button" href="/account/{{ user.id }}/edit_profile">Настройки аккаунта</a>
+
+        {% else %}
+
+            <img src="/main_app/uploads/{{ account.user.avatar }}" alt="">
+            <h3>{{ account.user.first_name }} {{ account.user.second_name }}</h3>
+
+            {% if account.user.birth_place %}
+                <p>{{ account.user.birth_place }}</p>        
+            {% endif %}
+            {% if account.user.birth_date %}
+                <span>{{account.user.birth_date}}</span>
+            {% endif %}
+
+            {% if not account.user in bookmarks %}
+                <form method="POST" action="/account/{{ account.user.id }}" class="js-add-bookmarks">
+                    {% csrf_token %}
+                    <input type="hidden" name="bookmark" value="{{ account.user.id }}">
+                    <button type="submit" class="btn btn-primary bottom">Добавить в закладки</button>
+                </form>
+            {% endif %}
+
+            <a class="under-button" href="/chat/{{ account.user.id }}">Написать сообщение</a>
+
+        {% endif %}
+    </div>
+    <div class="blog" id="wallposts">
+        {% include "accounts_app/includes/json_wallposts.html" %}
+    </div>
+</div>

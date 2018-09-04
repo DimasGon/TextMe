@@ -1,9 +1,41 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect, HttpResponse
+from django.template.loader import render_to_string
+from django.core.serializers.json import DjangoJSONEncoder
+from django.http import JsonResponse
 from django.views.generic import DetailView, UpdateView, View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django import forms
 from auth_app.models import MesUser
 from . import models
+
+class RusJsonResponse(JsonResponse):
+
+    def __init__(self, data, encoder=DjangoJSONEncoder, safe=False, *args, **kwargs):
+        json_dumps_params = dict(ensure_ascii=False)
+        super().__init__(data, encoder, safe, json_dumps_params, *args, **kwargs)
+
+class JSONAccountView(LoginRequiredMixin, View):
+
+    login_url = '/login'
+
+    def get(self, request):
+
+        adress = request.META.get('HTTP_REFERER')
+        id = int(adress[adress.find('account/') + 8])
+
+        account = models.AccountModel.objects.get(id=id)
+        wallposts = account.get_wallposts()
+        user_acc = models.AccountModel.objects.get(user=request.user)
+        bookmarks = user_acc.bookmarks.all()
+        # bookmarks_amount = len(bookmarks)
+
+        html_page = render_to_string(
+            'accounts_app/json_account.html',
+            {'account': account, 'wallposts': wallposts, 'bookmarks': bookmarks},
+            request
+        )
+
+        return RusJsonResponse({'html_page': html_page})
 
 class AccountRedirectView(LoginRequiredMixin, View):
 
@@ -59,7 +91,7 @@ class AccountView(LoginRequiredMixin, DetailView):
         models.WallPostModel(author=author, account=account, post_text=post_text).save()
 
     def post_comment(self):
-        
+
         author = self.request.user
         comment_text = self.request.POST.get('comment')
         to_post = int(self.request.POST.get('to_post'))
@@ -74,16 +106,45 @@ class AccountView(LoginRequiredMixin, DetailView):
         user_acc = models.AccountModel.objects.get(user=self.request.user)
         user_acc.bookmarks.add(bookmark)
 
+        print('\n\nДобавил')
+
     def post(self, request, pk):
 
         if request.POST.get('wallpost'):
+            
             self.post_wallpost(pk)
 
+            account = models.AccountModel.objects.get(id=pk)
+            wallposts = account.get_wallposts()
+            
+            wall = render_to_string(
+                'accounts_app/includes/json_wallposts.html',
+                {'wallposts': wallposts, 'account': account},
+                request
+            )
+
+            return RusJsonResponse({'wall': wall})
+
         elif request.POST.get('comment'):
+            
             self.post_comment()
+
+            account = models.AccountModel.objects.get(id=pk)
+            wallposts = account.get_wallposts()
+            
+            wall = render_to_string(
+                'accounts_app/includes/json_wallposts.html',
+                {'wallposts': wallposts, 'account': account},
+                request
+            )
+
+            return RusJsonResponse({'wall': wall})
 
         elif request.POST.get('bookmark'):
             self.post_add_to_bookmarks(request.POST.get('bookmark'))
+            return RusJsonResponse(None)
+
+        print('\n\n{}\n\n'.format(request.POST))
 
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 

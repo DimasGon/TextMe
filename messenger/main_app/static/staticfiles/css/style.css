@@ -294,6 +294,11 @@ li {
 
 .acc-content {
     float: left;
+    width: 100%;
+    height: 100vh;
+}
+#js-insert-acc {
+    float: left;
     width: 50%;
     height: 100vh;
 }
