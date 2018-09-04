@@ -28,6 +28,7 @@ class StartChatView(LoginRequiredMixin, View):
     def post(self, request, partner_id):
         
         mes_text = request.POST.get('mes_text')
+        image = request.POST.get('image')
         
         user = request.user
         partner = MesUser.objects.get(id=partner_id)
@@ -35,7 +36,8 @@ class StartChatView(LoginRequiredMixin, View):
         thread = models.ThreadModel.objects.create()
         thread.participants.add(request.user, partner)
 
-        message = models.MessageModel(text=mes_text, sender=user, thread=thread)
+        message = models.MessageModel(text=mes_text, sender=user, 
+            thread=thread, image=image)
         message.save()
 
         return HttpResponseRedirect('/chat/{}'.format(partner_id))
@@ -86,7 +88,9 @@ class ChatView(LoginRequiredMixin, View):
         thread = thread[0]
 
         mes_text = request.POST.get('mes_text')
-        message = models.MessageModel(text=mes_text, sender=request.user, thread=thread)
+        image = request.FILES.get('image')
+        message = models.MessageModel(text=mes_text, sender=request.user,
+            thread=thread, image=image)
         message.save()
 
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        return HttpResponseRedirect('/chat/{}'.format(partner_id))
