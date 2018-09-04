@@ -52,7 +52,7 @@ $("#js-insert-acc").on("submit", ".js-add-comment", function () {
         type: form.attr("method"),
         dataType: 'json',
         success: function (data) {
-            alert("Коммент добавлен");
+            $("#wallposts").html(data.wall);
         }
     });
     return false;

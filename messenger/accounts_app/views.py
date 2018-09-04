@@ -126,8 +126,19 @@ class AccountView(LoginRequiredMixin, DetailView):
             return RusJsonResponse({'wall': wall})
 
         elif request.POST.get('comment'):
+            
             self.post_comment()
-            return RusJsonResponse(None)
+
+            account = models.AccountModel.objects.get(id=pk)
+            wallposts = account.get_wallposts()
+            
+            wall = render_to_string(
+                'accounts_app/includes/json_wallposts.html',
+                {'wallposts': wallposts, 'account': account},
+                request
+            )
+
+            return RusJsonResponse({'wall': wall})
 
         elif request.POST.get('bookmark'):
             self.post_add_to_bookmarks(request.POST.get('bookmark'))
