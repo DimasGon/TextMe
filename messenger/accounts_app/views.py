@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, HttpResponseRedirect, HttpRespons
 from django.template.loader import render_to_string
 from django.core.serializers.json import DjangoJSONEncoder
 from django.http import JsonResponse
-from django.views.generic import DetailView, UpdateView, View
+from django.views.generic import UpdateView, TemplateView, View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django import forms
 from auth_app.models import MesUser
@@ -48,7 +48,7 @@ class JSONBookamrksView(LoginRequiredMixin, View):
 
         html_page = render_to_string(
             'accounts_app/json_bookmarks.html',
-            {'account': user_acc, 'bookmarks': bookmarks, 'bookmarks_amount': bookmarks_amount},
+            {'user_id': user_acc.user.id, 'bookmarks': bookmarks, 'bookmarks_amount': bookmarks_amount},
             request
         )
 
@@ -61,10 +61,8 @@ class AccountRedirectView(LoginRequiredMixin, View):
     def get(self, request):
         return HttpResponseRedirect('/account/{}'. format(request.user.id))
 
-class AccountView(LoginRequiredMixin, View):
-
-    def get(self, request, pk):
-        return render(request, 'accounts_app/account.html', {})
+class AccountView(LoginRequiredMixin, TemplateView):
+    template_name = 'accounts_app/account.html'
 
     def post_wallpost(self, account_id):
         
@@ -110,20 +108,21 @@ class AccountView(LoginRequiredMixin, View):
         elif request.POST.get('search'):
             
             search_acc = request.POST.get('search')
+            error = False
 
             try:
                 search_acc = models.AccountModel.objects.get(user__username=search_acc)
-            except models.AccountModel.DoesNotExist:
-                search_acc = None
+                if search_acc and search_acc.user != request.user:
+                    search_acc = search_acc.user
+                else:
+                    error = 'Себя нельзя добавить в закладки'
 
-            if search_acc and search_acc.user != request.user:
-                search_acc = search_acc.user
-            else:
-                search_acc = 'Нет совпадений'
+            except models.AccountModel.DoesNotExist:
+                error = 'Нет совпадений'
 
             html_page = render_to_string(
                 'accounts_app/json_bookmarks.html',
-                {'search_acc': search_acc},
+                {'user_id': request.user.id, 'error': error, 'search_acc': search_acc},
                 request
             )
 

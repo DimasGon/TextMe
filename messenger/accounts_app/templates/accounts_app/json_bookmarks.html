@@ -1,15 +1,15 @@
 {% load static %}
 
 <div class="search-friend btm-border">
-    <form method="POST" action="/account/{{ account.user.id }}" class="form-inline js-add-bookmarks">
+    <form method="POST" action="/account/{{ user_id }}" class="form-inline js-add-bookmarks">
         {% csrf_token %}
         <input type="text" name="search" class="form-control" placeholder="Поиск друга">
         <button type="submit" class="btn btn-primary">Найти</button>
     </form>
 </div>
 <div class="friends scroll">
-    {% if search_acc == 'Нет совпадений' %}
-        <h5 class="btm-border">Нет совпадений</h5>
+    {% if error %}
+        <h5 class="btm-border">{{ error }}</h5>
     
     {% elif search_acc %}
         <h5>Найденный аккаунт:</h5>
