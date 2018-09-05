@@ -1,0 +1,42 @@
+{% load static %}
+
+<div class="search-friend btm-border">
+    <form method="POST" action="/account/{{ account.user.id }}" class="form-inline js-add-bookmarks">
+        {% csrf_token %}
+        <input type="text" name="search" class="form-control" placeholder="Поиск друга">
+        <button type="submit" class="btn btn-primary">Найти</button>
+    </form>
+</div>
+<div class="friends scroll">
+    {% if search_acc == 'Нет совпадений' %}
+        <h5 class="btm-border">Нет совпадений</h5>
+    
+    {% elif search_acc %}
+        <h5>Найденный аккаунт:</h5>
+        <div class="friend btm-border">
+            <a href="/account/{{ search_acc.id }}">
+                <img src="/main_app/uploads/{{ search_acc.avatar }}">
+                <p>{{ search_acc.first_name }} {{ search_acc.second_name }}</p>
+            </a>
+            <a class="write-mes" href="/chat/{{ search_acc.id }}">Написать сообщение</a>
+        </div>
+
+    {% elif bookmarks %}
+    
+        <h5>Закладок: {{ bookmarks_amount }}</h5>
+
+        {% for user in bookmarks %}
+            <div class="friend btm-border">
+                <a href="/account/{{ user.id }}">
+                    <img src="/main_app/uploads/{{ user.avatar }}">
+                    <p>{{ user.first_name }} {{ user.second_name }}</p>
+                </a>
+                <a class="write-mes" href="/chat/{{ user.id }}">Написать сообщение</a>
+            </div>
+        {% endfor %}
+
+    {% else %}
+        <h5>У вас еще нет закладок</h5>
+
+    {% endif %}
+</div>
