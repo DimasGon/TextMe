@@ -1,7 +1,7 @@
 {% load static %}
 
 <div class="search-friend btm-border">
-    <form method="POST" action="/account/{{ user_id }}" class="form-inline js-add-bookmarks">
+    <form method="POST" action="/account/{{ user_id }}" class="form-inline js-search-bookmarks">
         {% csrf_token %}
         <input type="text" name="search" class="form-control" placeholder="Поиск друга">
         <button type="submit" class="btn btn-primary">Найти</button>
