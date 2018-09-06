@@ -1,0 +1,19 @@
+{% load static %}
+
+{% for acc in accounts %}
+
+    <a href="/chat/{{ acc.id }}">
+        <div class="left-content btm-border">
+            <img src="{{ acc.avatar }}">
+            <h5>{{ acc.first_name }} {{ acc.second_name }}</h5>
+            <p>{{ acc.last_message_text }}</p>
+            <span>{{ acc.last_message_time }}</span>
+        </div>
+    </a>
+
+{% empty %}
+
+    <p><center>Вы еще ни с кем не общались</center></p>
+
+{% endfor %}
+
