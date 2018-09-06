@@ -5,118 +5,13 @@
 
 {% block content %}
 
-<!-- Блок аккаунта и стена  -->
-<div class="acc-content scroll">
-    <div class="acc-info btm-border">
-
-        {% if account.id == user.id %}
-        
-            {% if account.avatar %}
-                <img src="/main_app/uploads/{{ account.avatar }}" alt="">
-            {% else %}
-                <a href=""></a> <img src="{% static 'staticfiles/img/default-logo.jpg' %}">
-            {% endif %}
-            <h3>{{ account.first_name }} {{ account.second_name }}</h3>
-            {% if account.birth_place %}
-                <p>{{ account.birth_place }}</p>        
-            {% endif %}
-            {% if account.birth_date %}
-                <span>{{account.birth_date}}</span>
-            {% endif %}
-
-        {% else %}
-        
-            {% if account.avatar %}
-                <img src="/main_app/uploads/{{ account.avatar }}" alt="">
-            {% else %}
-                <img src="{% static 'staticfiles/img/default-logo.jpg' %}">
-            {% endif %}
-            <h3>{{ account.first_name }} {{ account.second_name }}</h3>
-            {% if account.birth_place %}
-                <p>{{ account.birth_place }}</p>        
-            {% endif %}
-            {% if account.birth_date %}
-                <span>{{account.birth_date}}</span>
-            {% endif %}
-
-        {% endif %}
-
-        <button type="button" class="btn btn-primary bottom">Добавить в друзья</button>
-        <form class="form-inline" style="margin-top:3px">
-            <input type="text" class="form-control mr-1" placeholder="Сообщение">
-            <button type="submit" class="btn btn-primary">Написать</button>
-        </form>
-    </div>
-    <div class="blog">
-        <div class="post-field">
-            <form>
-                <div class="form-group no-mg">
-                    <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="Чем вы хотите поделиться?"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary btn-right-align">Создать запись</button>
-            </form>
-        </div>
-        <div class="blog-post">
-            <a href="/accounts/id">
-                <img src="{% static 'staticfiles/img/friend.jpg' %}">
-                <span>Диана Кретова</span>
-            </a>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptates, dolorum mollitia eligendi numquam corporis quaerat! Qui illo doloribus est quidem totam quia dolore, sunt quae tempora, enim corrupti consequuntur animi, similique nulla unde doloremque reiciendis. Culpa pariatur esse enim tempora est, sint consequatur vero, fuga, totam eos perferendis exercitationem facere.</p>
-            <div class="comment-content">
-                <form class="form-inline no-mg">
-                    <input type="text" class="form-control mr-sm-2 com-field" placeholder="Комментарий">
-                    <button type="submit" class="btn btn-primary btn-right-align">Сохранить</button>
-                </form>
-                <!-- Комментарий -->
-                <div class="comment">
-                    <a href="/accounts/id">
-                        <img src="{% static 'staticfiles/img/logo.jpg' %}">
-                        <span>Дима Гончар</span>
-                    </a>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam soluta sed suscipit ipsam maxime quae nulla, corporis asperiores incidunt animi.</p>
-                </div>
-                <div class="comment">
-                    <a href="/accounts/id">
-                        <img src="{% static 'staticfiles/img/friend.jpg' %}">
-                        <span>Диана Кретова</span>
-                    </a>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam soluta sed suscipit ipsam maxime quae nulla, corporis asperiores incidunt animi.</p>
-                </div>
-            </div>
-        </div>
-        <div class="blog-post">
-            <a href="/accounts/id">
-                <img src="{% static 'staticfiles/img/logo.jpg' %}">
-                <span>Дима Гончар</span>
-            </a>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, mollitia quaerat provident autem, consequuntur possimus, debitis minima officiis consequatur libero voluptas? Totam, fuga! Eveniet, placeat blanditiis debitis quia eligendi sit, accusamus provident quae, et unde laudantium id maxime. Unde dicta at facilis nihil exercitationem iure nobis vitae dolores distinctio adipisci tenetur obcaecati architecto dolorum nesciunt est, officiis ea impedit cum id? Cum quia dolor nulla odit dicta. Asperiores, tempore repellat?</p>
-            <div class="comment-content">
-                <form class="form-inline no-mg">
-                    <input type="text" class="form-control mr-sm-2 com-field" placeholder="Комментарий">
-                    <button type="submit" class="btn btn-primary btn-right-align">Сохранить</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Левый блок друзей -->
-<div class="friend-list">
-    <div class="search-friend btm-border">
-        <form class="form-inline">
-            <input type="text" class="form-control" placeholder="Поиск друга">
-            <button type="submit" class="btn btn-primary">Найти</button>
-        </form>
-    </div>
-    <div class="friends scroll">
-        <h5 class="btm-border">20 друзей</h5>
-        <div class="friend btm-border">
-            <a href="/accounts/id">
-                <img src="{% static 'staticfiles/img/friend.jpg' %}">
-                <p>Диана Кретова</p>
-            </a>
-            <a class="write-mes" href="/id">Написать сообщение</a>
-        </div>
-    </div>
-</div>
+<!-- Блок аккаунта, стена и правый блок друзей -->
+<div class="acc-content scroll" id="js-insert-acc"></div>
+<!-- Правый блок друзей -->
+<div class="friend-list" id="js-insert-bookmarks"></div>
 
 {% endblock content %}
+
+{% block page_js %}
+<script src="{% static 'accounts_app/js/account.js' %}"></script>
+{% endblock page_js %}

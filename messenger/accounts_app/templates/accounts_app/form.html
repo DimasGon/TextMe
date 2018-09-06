@@ -1,0 +1,30 @@
+{% extends "base_form.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}
+Настройки аккаунта
+{% endblock title %}
+
+{% block top-text %}
+Настройки аккаунта
+{% endblock top-text %}
+
+{% block content %}
+{% for error in form.non_field_errors %}
+    {{ error }}
+{% endfor %}
+{% for field in form %}
+    <div class="form-group has-feedback wthree">
+        {% render_field field class="form-control" %}
+        {% for error in field.errors %}
+            {{ error }}
+        {% endfor %}
+    </div>
+{% endfor %}
+<div class="submit w3-agile">
+    <input class="btn btn-lg" type="submit">
+</div>
+
+<a class="a-href" href="/account/{{ user.id }}">На страницу</a>
+{% endblock content %}

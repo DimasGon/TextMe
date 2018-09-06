@@ -1,5 +1,6 @@
 from django import forms
 from auth_app.models import MesUser
+from accounts_app.models import AccountModel
 
 class SignInForm(forms.ModelForm):
 
@@ -26,8 +27,6 @@ class SignInForm(forms.ModelForm):
 
     def clean_password_confirm(self):
 
-        print('-------------\n{}\n-------------'.format(self.cleaned_data))
-
         password = self.cleaned_data.get('password')
         password_confirm = self.cleaned_data.get('password_confirm')
 
@@ -39,7 +38,10 @@ class SignInForm(forms.ModelForm):
     def save(self):
 
         user = super(SignInForm, self).save(commit=False)
+        user.set_password(self.cleaned_data.get('password'))
         user.save()
+
+        AccountModel(user=user).save()
 
         return user
 

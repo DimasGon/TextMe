@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.conf import settings
-from django.db.models.signals import pre_save, post_save
 
 class MesUser(AbstractUser):
 
@@ -10,16 +9,14 @@ class MesUser(AbstractUser):
     email = models.EmailField(verbose_name='Эллектронный адрес')
     birth_place = models.CharField(max_length=50, verbose_name='Место рождения')
     birth_date = models.DateField(verbose_name='Дата рождения')
-    avatar = models.ImageField(null=True, verbose_name='Аватар', upload_to='users_logo/')
+    avatar = models.ImageField(null=True, blank=True,verbose_name='Аватар',
+        upload_to='users_logo/', default='users_logo/default-logo.jpg')
     signin_date = models.DateTimeField(auto_now_add=True)
 
-def before_save(sender, instance, created=None, **kwargs):
+    class Meta:
 
-    print('\n\nФУНКЦИЯ before_save\nsender: {}, instance: {}\n\n'.format(sender, instance))
+        verbose_name = 'Пользователь'
+        verbose_name_plural = 'Пользователи'
 
-def after_save(sender, instance, created=None, **kwargs):
-
-    print('\n\nФУНКЦИЯ after_save\nsender: {}, instance: {}\n\n'.format(sender, instance))
-
-pre_save.connect(before_save, sender=MesUser)
-post_save.connect(after_save, sender=MesUser)
+    def __str__(self):
+        return self.username

@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'main_app',
     'auth_app',
     'accounts_app',
+    'chat_app',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -40,6 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'widget_tweaks',
+
 ]
 
 MIDDLEWARE = [

@@ -5,12 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="{% static 'staticfiles/img/favicon.png' %}" type="image/png">
     <link rel="stylesheet" href="{% static 'staticfiles/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'staticfiles/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'staticfiles/css/bootstrap-grid.min.css' %}">
     <link rel="stylesheet" href="{% static 'staticfiles/css/bootstrap-reboot.min.css' %}">
     <link rel="stylesheet" href="{% static 'staticfiles/css/whhg.css' %}">
     {% block css %}{% endblock css %}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
     {% block js %}{% endblock js %}
     <title>{% block title %}{% endblock title %}</title>
 </head>
@@ -23,10 +26,10 @@
     <div class="left-title">
         <ul class="nav justify-content-center">
             <li class="nav-item">
-                <a class="nav-link" href=""><i class="icon-chat"></i></a>
+                <a class="nav-link" href="/chat"><i class="icon-chat"></i></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/account/{{ user.id }}"><img src="{% static 'staticfiles/img/logo.jpg' %}" class="acc-logo"></a>
+                <a class="nav-link" href="/account/{{ user.id }}"><i class="icon-user"></i></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/logout"><i class="icon-exit"></i></a>
@@ -35,18 +38,18 @@
     </div>
     <hr>
     <!-- Часть левого меню хранящая ссылки на чаты -->
-    <div class="chats scroll">
-        <a href="/id">
-            <div class="left-content btm-border">
-                <img src="{% static 'staticfiles/img/friend.jpg' %}">
-                <h5>Диана Кретова</h5>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing</p>
-            </div>
-        </a>
-    </div>
+    <div id="chats" class="chats scroll"></div>
 </div>
 
 {% block content %}{% endblock content %}
+
+<script type="text/javascript" src="{% static 'staticfiles/js/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'staticfiles/js/chats_api.js' %}"></script>
+<script>
+    axios.get('http://127.0.0.1:8000/chats_api')
+        .then(renderChat)
+</script>
+{% block page_js %}{% endblock page_js %}
 
 </body>
 </html>

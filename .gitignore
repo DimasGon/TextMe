@@ -2,3 +2,6 @@
 *.cpython-36.pyc
 messenger/messenger/local_settings.py
 messenger/auth_app/migrations/*
+messenger/db.sqlite3
+messenger/accounts_app/migrations/*
+messenger/chat_app/migrations/*

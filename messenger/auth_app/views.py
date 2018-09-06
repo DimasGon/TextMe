@@ -46,15 +46,13 @@ class SignInView(mixins.AnonRequired, FormView):
 
     def post(self, request):
 
-        print('\n\n{}\n\n'.format(request.FILES))
-
         form = self.form_class(request.POST, request.FILES)
         
         if form.is_valid():
 
             user = form.save()
             login(request, user)
-
+            
             return redirect(self.success_url + str(user.id))
         
         return render(request, 'auth_app/form.html', {'form': form})
