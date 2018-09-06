@@ -8,6 +8,7 @@ from django import forms
 from auth_app.models import MesUser
 from . import models
 
+# -------------------- API -------------------- #
 class RusJsonResponse(JsonResponse):
 
     def __init__(self, data, encoder=DjangoJSONEncoder, safe=False, *args, **kwargs):
@@ -54,6 +55,7 @@ class JSONBookamrksView(LoginRequiredMixin, View):
 
         return RusJsonResponse({'html_page': html_page})
 
+# -------------------- КОНТРОЛЛЕРЫ -------------------- #
 class AccountRedirectView(LoginRequiredMixin, View):
 
     login_url = '/login'
