@@ -1,5 +1,8 @@
 from django.shortcuts import render, HttpResponse
 from django.views.generic import TemplateView, View
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.template.loader import render_to_string
+from main_app.serializers import RusJsonResponse
 import chat_app.models as chat_app
 import json
 from . import serializers
@@ -7,7 +10,9 @@ from . import serializers
 class IndexView(TemplateView):
     template_name = 'main_app/index.html'
 
-class ThreadApiView(View):
+class ThreadApiView(LoginRequiredMixin, View):
+
+    login_url = '/login'
 
     def get(self, request):
 
@@ -30,4 +35,10 @@ class ThreadApiView(View):
             time = thread.last_message_time
             user['last_message_time'] = ':'.join([str(time.hour + 3), str(time.minute)])
 
-        return HttpResponse(json.dumps({'result': serializer.data}, ensure_ascii=False))
+        left_chats = render_to_string(
+            'main_app/left_chats.html',
+            {'accounts': serializer.data},
+            request
+        )
+
+        return RusJsonResponse({'left_chats': left_chats})
