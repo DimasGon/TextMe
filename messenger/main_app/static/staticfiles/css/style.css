@@ -112,9 +112,14 @@ li {
 }
 
 /* ------------------------ СТИЛИ ЧАТА ------------------------ */
+.where-to-insert {
+    float: left;
+    width: 70%;
+    height: 100vh;
+}
 .empty-chat {
     font-size: 30px;
-    width: 70%;
+    width: 100%;
     height: 100vh;
     display: flex;
     align-items: center;
@@ -124,7 +129,7 @@ li {
 
 .chat-content {
     float: left;
-    width: 50%;
+    width: 70%;
     height: 100vh;
     border-right: 1px solid rgba(0,0,0,.1);
     font-size: 30px;
@@ -205,6 +210,11 @@ li {
     float: right;
     display: block;
 }
+.sending i {
+    margin-right: 5px;
+    color: rgb(172, 179, 243);
+    float: right;
+}
 .friend-mes {
     margin: 0 10% 5px 5px;
     border-radius: 20px 20px 20px 5px;
@@ -252,7 +262,7 @@ li {
 .interlocutor-content {
     float: left;
     height: 100vh;
-    width: 20%;
+    width: 30%;
 }
 .il-info {
     width: 100%;

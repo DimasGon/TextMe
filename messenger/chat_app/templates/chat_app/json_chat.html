@@ -1,0 +1,123 @@
+{% load static %}
+
+{% if show == 'chat' %}
+
+    <!-- Блок чата -->
+    <div class="chat-content js-insert-messages">
+        <!-- С кем чат -->
+        <div class="chat-with-person">
+            Чат с: <a href="/account/{{ partner.id }}">{{ partner.first_name }} {{ partner.second_name }}</a>
+        </div>
+        <hr>
+        <!-- Окно чата -->
+        <div class="chat-window scroll">
+            <!-- Каждый ul для одного сообщения -->
+
+            <ul class="mes-container sending" id="js-insert-new-mes"></ul>
+
+            {% for mes in messages %}
+
+                <ul class="mes-container">
+                    {% if mes.sender.id == user.id %}
+                        <li class="user-mes">
+                            <p>{{ mes.text }}</p>
+                            {% if mes.image %}
+                                <img id="{{ mes.image }}" src="/main_app/uploads/{{ mes.image }}" alt="">
+                            {% endif %}
+                            <span>{{ mes.time }}</span>
+                        </li>
+                    {% else %}
+                        <li class="friend-mes">
+                            <p>{{ mes.text }}</p>
+                            {% if mes.image %}
+                                <img id="{{ mes.image }}" src="/main_app/uploads/{{ mes.image }}" alt="">
+                            {% endif %}
+                            <span>{{ mes.time }}</span>
+                        </li>
+                    {% endif %}
+                </ul>
+
+            {% endfor %}
+
+        </div>
+        <!-- Поле для ввода текста сообщения -->
+        <div class="mes-field">
+            <form method="POST" action="/chat/{{ partner.id }}" enctype="multipart/form-data" class="js-send-mes">
+            {% csrf_token %}
+                <div class="form-group no-mg file-upload">
+                    <input id="input-text" name="mes_text" type="text" class="form-control" placeholder="Введите текст сообщения">
+                    <label>
+                        <input type="file" name="image" class="not-full-line"><span><i class="icon-paperclip"></i></span>
+                    </label>
+                    <button type="submit" class="btn btn-primary btn-right-align">Отправить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Информация о собеседнике -->
+    <div class="interlocutor-content scroll">
+        <div class="il-info">
+            <img src="/main_app/uploads/{{ partner.avatar }}" alt="">
+            <h3>{{ partner.first_name }} {{ partner.second_name }}</h3>
+            <p>{{ partner.birth_place }}</p>
+            <span>{{ partner.birth_date }}</span>
+            <hr>
+        </div>
+        <div class="shared-photos">
+            <p><span><i class="icon-images-gallery"></i></span> ОБЩИЕ ФОТО</p>
+            {% for mes in messages %}
+                {% if mes.image %}
+                    <a href="#{{ mes.image }}">
+                        <img src="/main_app/uploads/{{ mes.image }}">
+                    </a>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+{% elif show == 'start' %}
+
+    <div class="chat-content js-insert-messages">
+        <!-- С кем чат -->
+        <div class="chat-with-person">
+            Чат с: <a href="/account/{{ partner.id }}">{{ partner.first_name }} {{ partner.second_name }}</a>
+        </div>
+        <hr>
+        <!-- Окно чата -->
+        <div class="empty-window scroll">
+            Вы еще не общались.<br>
+            Напишите "Привет!"
+        </div>
+        <!-- Поле для ввода текста сообщения -->
+        <div class="mes-field">
+            <form method="POST" action="/chat/{{ partner.id }}" enctype="multipart/form-data" class="js-send-mes">
+            {% csrf_token %}
+                <div class="form-group no-mg file-upload">
+                    <input type="text" name="mes_text" class="form-control" placeholder="Введите текст сообщения">
+                    <label>
+                        <input type="file" class="not-full-line"><span><i class="icon-paperclip"></i></span>
+                    </label>
+                    <button type="submit" class="btn btn-primary btn-right-align">Отправить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Информация о собеседнике -->
+    <div class="interlocutor-content scroll">
+        <div class="il-info">
+            <img src="/main_app/uploads/{{ partner.avatar }}" alt="">
+            <h3>{{ partner.first_name }} {{ partner.second_name }}</h3>
+            <p>{{ partner.birth_place }}</p>
+            <span>{{ partner.birth_date }}</span>
+            <hr>
+        </div>
+    </div>
+
+{% else %}
+
+    <div class="empty-chat">
+        Окно чата пусто! <br>
+        Напишите кому-нибудь или выберите диалог на панели слева
+    </div>
+
+{% endif %}
