@@ -31,6 +31,7 @@ $(function () {
         }
     });
     
-    $("#js-insert-chat").on("submit", ".js-send-mes", reloadMessages)
+    $("#js-insert-chat").on("submit", ".js-send-mes", reloadMessages);
+    $("#js-insert-chat").on("submit", ".js-send-mes", loadLeftChats);
 
 })

@@ -98,6 +98,12 @@ class StartChatView(LoginRequiredMixin, View):
         user = request.user
         partner = MesUser.objects.get(id=partner_id)
 
+        thread = models.ThreadModel.objects.filter(
+            participants=partner).filter(participants=request.user)
+
+        if thread:
+            return HttpResponseRedirect('/chat/api/{}'.format(partner_id))
+
         thread = models.ThreadModel.objects.create()
         thread.participants.add(request.user, partner)
 
@@ -135,4 +141,3 @@ class ChatView(LoginRequiredMixin, TemplateView):
         message.save()
 
         return HttpResponseRedirect('/chat/api/{}'.format(partner_id))
-]

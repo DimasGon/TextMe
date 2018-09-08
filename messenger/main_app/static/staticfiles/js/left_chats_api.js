@@ -1,5 +1,4 @@
-$(function () {
-    
+var loadLeftChats = function () {
     $.ajax({
         url: '/chats_api',
         type: 'get',
@@ -8,5 +7,10 @@ $(function () {
             $("#js-insert-left-chats").html(data.left_chats);
         }
     });
+}
+
+$(function () {
+    
+    loadLeftChats();
 
 })
