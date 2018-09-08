@@ -15,6 +15,14 @@ var reloadMessages = function () {
         },
         success: function (data) {
             $("#js-insert-chat").html(data.chat_page)
+        },
+        error: function () {
+            $("#js-insert-new-mes").html(
+                `<i class="error-color icon-erroralt"></i>
+                <li class="user-mes">
+                    <p>${ $("#input-text").val() }</p>
+                </li>`
+            );
         }
     })
     return false;

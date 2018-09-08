@@ -84,16 +84,20 @@
         </div>
         <hr>
         <!-- Окно чата -->
-        <div class="empty-window scroll">
-            Вы еще не общались.<br>
-            Напишите "Привет!"
+        <div class="chat-window scroll">
+            <ul class="mes-container sending" id="js-insert-new-mes">
+                <div class="empty-window">
+                    Вы еще не общались.<br>
+                    &dArr; Напишите "Привет!" &dArr;
+                </div>
+            </ul>
         </div>
         <!-- Поле для ввода текста сообщения -->
         <div class="mes-field">
             <form method="POST" action="/chat/start_messaging/{{ partner.id }}" enctype="multipart/form-data" class="js-send-mes">
             {% csrf_token %}
                 <div class="form-group no-mg file-upload">
-                    <input type="text" name="mes_text" class="form-control" placeholder="Введите текст сообщения">
+                    <input id="input-text" name="mes_text" type="text" class="form-control" placeholder="Введите текст сообщения">
                     <label>
                         <input type="file" class="not-full-line"><span><i class="icon-paperclip"></i></span>
                     </label>
