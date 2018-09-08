@@ -12,7 +12,6 @@ var reloadMessages = function () {
                     <p>${ $("#input-text").val() }</p>
                 </li>`
             );
-            alert(form.serialize());
         },
         success: function (data) {
             $("#js-insert-chat").html(data.chat_page)
@@ -22,6 +21,15 @@ var reloadMessages = function () {
 }
 
 $(function () {
+
+    $.ajax({
+        url: '/chat/api',
+        type: 'get',
+        dataType: 'json',
+        success: function (data) {
+            $("#js-insert-chat").html(data.chat_page);
+        }
+    });
     
     $("#js-insert-chat").on("submit", ".js-send-mes", reloadMessages)
 

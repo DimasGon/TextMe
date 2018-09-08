@@ -90,7 +90,7 @@
         </div>
         <!-- Поле для ввода текста сообщения -->
         <div class="mes-field">
-            <form method="POST" action="/chat/{{ partner.id }}" enctype="multipart/form-data" class="js-send-mes">
+            <form method="POST" action="/chat/start_messaging/{{ partner.id }}" enctype="multipart/form-data" class="js-send-mes">
             {% csrf_token %}
                 <div class="form-group no-mg file-upload">
                     <input type="text" name="mes_text" class="form-control" placeholder="Введите текст сообщения">
