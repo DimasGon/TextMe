@@ -38,17 +38,14 @@
     </div>
     <hr>
     <!-- Часть левого меню хранящая ссылки на чаты -->
-    <div id="chats" class="chats scroll"></div>
+    <div class="chats scroll" id="js-insert-left-chats"></div>
 </div>
 
 {% block content %}{% endblock content %}
 
 <script type="text/javascript" src="{% static 'staticfiles/js/jquery.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'staticfiles/js/chats_api.js' %}"></script>
-<script>
-    axios.get('http://127.0.0.1:8000/chats_api')
-        .then(renderChat)
-</script>
+<script type="text/javascript" src="{% static 'staticfiles/js/left_chats_api.js' %}"></script>
+
 {% block page_js %}{% endblock page_js %}
 
 </body>
