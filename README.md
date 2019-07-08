@@ -13,3 +13,6 @@
 2. Django Rest Framework
 3. MongoDB для хранения сообщений
 4. AJAX
+
+***
+Протестировать работу можно по ссылке http://textme.gonchar-da.ru/
