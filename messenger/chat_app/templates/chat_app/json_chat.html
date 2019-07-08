@@ -18,20 +18,20 @@
             {% for mes in messages %}
 
                 <ul class="mes-container">
-                    {% if mes.sender.id == user.id %}
+                    {% if mes.sender_id == user.id %}
                         <li class="user-mes">
                             <p>{{ mes.text }}</p>
-                            {% if mes.image %}
+                            {% comment %} {% if mes.image %}
                                 <img id="{{ mes.image }}" src="/main_app/uploads/{{ mes.image }}" alt="">
-                            {% endif %}
+                            {% endif %} {% endcomment %}
                             <span>{{ mes.time }}</span>
                         </li>
                     {% else %}
                         <li class="friend-mes">
                             <p>{{ mes.text }}</p>
-                            {% if mes.image %}
+                            {% comment %} {% if mes.image %}
                                 <img id="{{ mes.image }}" src="/main_app/uploads/{{ mes.image }}" alt="">
-                            {% endif %}
+                            {% endif %} {% endcomment %}
                             <span>{{ mes.time }}</span>
                         </li>
                     {% endif %}
@@ -94,7 +94,7 @@
         </div>
         <!-- Поле для ввода текста сообщения -->
         <div class="mes-field">
-            <form method="POST" action="/chat/start_messaging/{{ partner.id }}" enctype="multipart/form-data" class="js-send-mes">
+            <form method="POST" action="/chat/{{ partner.id }}" enctype="multipart/form-data" class="js-send-mes">
             {% csrf_token %}
                 <div class="form-group no-mg file-upload">
                     <input id="input-text" name="mes_text" type="text" class="form-control" placeholder="Введите текст сообщения">

@@ -2,34 +2,29 @@ from django.db import models
 from django.db.models.signals import post_save
 from auth_app.models import MesUser
 
-class ThreadModel(models.Model):
+class MongoServerModel(models.Model):
 
+    is_started = models.BooleanField(verbose_name='Статус работы MongoDB', default=False)
+    process_id = models.IntegerField(verbose_name='PID процесса, в котором работает MongoDB', default=-1)
+    updated_at = models.DateTimeField(verbose_name='Дата и время обновления статуса MongoDB', auto_now_add=True)
+
+    def __str__(self):
+        return 'Сервер MongoDB'
+
+    @staticmethod
+    def get_model():
+        return MongoServerModel.objects.get(id=1)
+
+
+class ChatModel(models.Model):
+    
     participants = models.ManyToManyField(MesUser)
-    last_message_time = models.DateTimeField(auto_now_add=False, blank=True, null=True)
-    last_message_text = models.TextField()
+    mongo_collection = models.CharField(max_length=100, primary_key=True)
+    last_message_text = models.TextField(blank=True, null=True)
+    last_message_time = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.mongo_collection
 
     def get_partner(self, user):
-
-        for obj in self.participants.all():
-            if obj != user:
-                return obj
-
-class MessageModel(models.Model):
-
-    text = models.TextField(verbose_name='Текст сообщения')
-    sender = models.ForeignKey(MesUser, on_delete=models.DO_NOTHING)
-    thread = models.ForeignKey(ThreadModel, on_delete=models.CASCADE)
-    time = models.DateTimeField(auto_now_add=True)
-    image = models.ImageField(null=True, blank=True, upload_to='chat_images/')
-
-def update_last_thread(sender, instance, created, **kwargs):
-
-    if not created:
-        return
-    
-    thread = ThreadModel.objects.get(id=instance.thread.id)
-    thread.last_message_time = instance.time
-    thread.last_message_text = instance.text
-    thread.save()
-
-post_save.connect(update_last_thread, MessageModel)
+        return self.participants.all().exclude(id=user.id)[0]

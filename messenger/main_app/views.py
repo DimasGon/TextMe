@@ -10,35 +10,28 @@ from . import serializers
 class IndexView(TemplateView):
     template_name = 'main_app/index.html'
 
-class ThreadApiView(LoginRequiredMixin, View):
+class ChatsApiView(LoginRequiredMixin, View):
 
     login_url = '/login'
 
     def get(self, request):
-
-        threads = chat_app.ThreadModel.objects.filter(
+        chats = chat_app.ChatModel.objects.filter(
             participants=request.user).order_by('-last_message_time')
-
         partners = list()
-
-        for thread in threads:
-
-            partner = thread.get_partner(request.user)
+        for chat in chats:
+            partner = chat.get_partner(request.user)
             partners.append(partner)
-
         serializer = serializers.MesUserSerializer(partners, many=True)
-
         for user in serializer.data:
-            
-            thread = threads.filter(participants=user['id'])[0]
-            user['last_message_text'] = thread.last_message_text
-            time = thread.last_message_time
-            user['last_message_time'] = ':'.join([str(time.hour + 3), str(time.minute)])
-
+            chat = chats.filter(participants=user['id'])[0]
+            user['last_message_text'] = chat.last_message_text
+            time = chat.last_message_time
+            print(time)
+            user['last_message_time'] = time
+        print(serializer.data)
         left_chats = render_to_string(
             'main_app/left_chats.html',
             {'accounts': serializer.data},
             request
         )
-
         return RusJsonResponse({'left_chats': left_chats})
